@@ -39,7 +39,7 @@ latex_string = table(
     label="tab:cifar10"
 )
 ```
-![Simple Table](./res/readme/simple-table.png)
+![Simple Table](docs/res/images/table/simple_df_to_latex.png)
 
 **Grouped 4-level index table:**
 ```python
@@ -60,7 +60,7 @@ latex_string = table(
     label="tab:combo_results"
 )
 ```
-![Complex Table](./res/readme/complex-table.png)
+![Complex Table](docs/res/images/table/grouped_multicol_latex.png)
 
 ---
 

@@ -1,22 +1,34 @@
 from ._registry import register_table
 from ._utils import format_cell
 
-
 @register_table(
-    name="results_multilevel_latex",
-    description="Multi-level LaTeX table with grouped blocks, hierarchical columns, and bolded best values.",
-    requires_latex=["\\usepackage{graphicx}", "\\usepackage{booktabs}", "\\usepackage{xcolor}", r"\newcommand{\highlightcolor}[1]{\colorbox[HTML]{bae6fb}{\textbf{#1}}}"],
+    name="grouped_multicol_latex",
+    description=(
+        "Render a grouped LaTeX table with hierarchical column headers.\n"
+        "- The DataFrame must contain:\n"
+        "  - A row label column (e.g., 'Model')\n"
+        "  - Two columns for column grouping (e.g., 'Split', 'Budget')\n"
+        "  - A grouping column for row-wise subtables (e.g., 'Task')\n"
+        "  - A value column, which can be:\n"
+        "      – a float (e.g., 0.92)\n"
+        "      – or a list of floats (e.g., [0.91, 0.93, 0.92])\n"
+        "- Automatically computes mean ± std or stderr\n"
+        "- Highlights best values (min or max) per column *within each group*\n"
+    ),
+    requires_latex=[r"\usepackage{booktabs}", r"\usepackage{scalefnt}", r"\newcommand{\highlightcolor}[1]{\colorbox[HTML]{bae6fb}{\textbf{#1}}}"],
     args=[
-        {"name": "df", "type": "pd.DataFrame", "required": True, "description": "Long-format data with values + metadata."},
-        {"name": "row_index", "type": "str", "required": True, "description": "Column to use as row index (e.g., 'Model')."},
-        {"name": "col_index", "type": "List[str]", "required": True, "description": "Two columns to form hierarchical columns (e.g., ['Split', 'Budget'])."},
-        {"name": "groupby", "type": "str", "required": True, "description": "Column to group subtables (e.g., 'Task')."},
-        {"name": "value_column", "type": "str", "required": True, "description": "Column with list/float values to format."},
-        {"name": "highlight", "type": "str", "required": False, "description": "'min' or 'max' to bold best values in each column."},
-        {"name": "stderr", "type": "bool", "required": False, "description": "Use standard error instead of std."},
-        {"name": "caption", "type": "str", "required": False, "description": "LaTeX caption."},
-        {"name": "label", "type": "str", "required": False, "description": "LaTeX label."}
-    ]
+        {"name": "df", "type": "pd.DataFrame", "required": True, "description": "DataFrame with row and column metadata + values. Must include all column names passed below."},
+        {"name": "row_index", "type": "str", "required": True, "description": "Name of the column to use for the leftmost index (e.g., 'Model')."},
+        {"name": "col_index", "type": "List[str]", "required": True, "description": "Two column names to create multi-level column headers (e.g., ['Split', 'Budget'])."},
+        {"name": "groupby", "type": "str", "required": True, "description": "Column used to group subtables (e.g., 'Task')."},
+        {"name": "value_column", "type": "str", "required": True, "description": "Column containing scalar or list-like values to format."},
+        {"name": "highlight", "type": "str", "required": False, "description": "'min' or 'max' to bold best values per column within each group."},
+        {"name": "stderr", "type": "bool", "required": False, "description": "Use standard error instead of std deviation."},
+        {"name": "caption", "type": "str", "required": False, "description": "Optional LaTeX caption added below the table."},
+        {"name": "label", "type": "str", "required": False, "description": "Optional LaTeX label for referencing."}
+    ],
+    example_image="grouped_multicol_latex.png",
+    example_code="grouped_multicol_latex.py"
 )
 def plot(
     df,

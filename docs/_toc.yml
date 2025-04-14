@@ -1,0 +1,8 @@
+format: jb-book
+root: intro
+
+chapters:
+  - file: tables/index
+    sections:
+      - file: tables/collection/grouped_multicol_latex
+      - file: tables/collection/simple_df_to_latex

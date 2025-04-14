@@ -3,16 +3,28 @@ from ._utils import format_cell
 
 
 @register_table(
-    name="df_to_latex",
-    description="Auto-computes mean ± std or stderr, bolds best values (min or max).",
-    requires_latex=["\\usepackage{booktabs}", "\\usepackage{graphicx}"],
+    name="simple_df_to_latex",
+    description=(
+            "Render a simple LaTeX table from a flat DataFrame.\n"
+            "- First column (e.g., 'Model') is treated as the row label\n"
+            "- Other columns contain either scalars or list-like values (e.g. [0.82, 0.84, 0.85])\n"
+            "- Automatically formats values as mean ± std or stderr\n"
+            "- Optionally highlights best values per column (min or max)"
+    ),
+    requires_latex=["\\usepackage{booktabs}"],
     args=[
-        {"name": "df", "type": "pd.DataFrame", "required": True, "description": "DataFrame of numeric or list-like values."},
-        {"name": "highlight", "type": "Dict[str, str]", "required": False, "description": "Map of column → 'min' or 'max'."},
-        {"name": "stderr", "type": "bool", "required": False, "description": "Use standard error instead of std."},
-        {"name": "caption", "type": "str", "required": False, "description": "LaTeX caption."},
-        {"name": "label", "type": "str", "required": False, "description": "LaTeX label."}
-    ]
+        {"name": "df", "type": "pd.DataFrame", "required": True,
+         "description": "DataFrame where the first column is a string label (e.g., 'Model') and other columns are scalars or list-like numeric values."},
+        {"name": "highlight", "type": "Dict[str, str]", "required": False,
+         "description": "Map of column → 'min' or 'max' to bold the best values."},
+        {"name": "stderr", "type": "bool", "required": False,
+         "description": "Use standard error (instead of std) for ± formatting."},
+        {"name": "caption", "type": "str", "required": False,
+         "description": "Optional caption to display below the table."},
+        {"name": "label", "type": "str", "required": False, "description": "Optional LaTeX label for referencing."}
+    ],
+    example_image="simple_df_to_latex.png",
+    example_code="simple_df_to_latex.py"
 )
 def plot(df, highlight=None, stderr=False, caption=None, label=None):
     import pandas as pd
