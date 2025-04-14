@@ -53,8 +53,8 @@ def generate_docs():
         args_section = to_arg_table(info.get("args", []))
         latex_packages = "".join([f"- `{pkg}`\n" for pkg in info.get("requires_latex", [])]) or "- _None_"
 
-        img_path = f"../../_images/{info.get('example_image', f'tables/{name}.png')}"
-        code_path = f'docs/res/snippets/tables/{info.get("example_code", f"tables/{name}.py")}'
+        img_path = f"../../_static/images/tables/{info.get('example_image', f'tables/{name}.png')}"
+        code_path = f'../../_static/snippets/tables/{info.get("example_code", f"tables/{name}.py")}'
 
         # Load code
         code_contents = ""

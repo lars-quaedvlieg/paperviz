@@ -31,24 +31,8 @@
 
 ````{dropdown} Click to show example code
 ```python
-df = pd.DataFrame({
-    "Model": ["A", "B"],
-    "acc": [[0.85, 0.88, 0.87], [0.90, 0.91, 0.89]],
-    "f1": [0.83, [0.92, 0.93]]
-})
-
-latex = table(
-    "df_to_latex",
-    df,
-    highlight={"acc": "max", "f1": "max"},
-    stderr=False,
-    caption="Results on CIFAR-10",
-    label="tab:cifar10_results"
-)
-
-print(latex)
-
+# Example code for |simple_df_to_latex| not found.
 ```
 ````
 
-<img src="../../_images/simple_df_to_latex.png" alt="simple_df_to_latex" style="max-width: 100%; width: auto; height: auto; max-height: 450px;">
+<img src="../../_static/images/tables/simple_df_to_latex.png" alt="simple_df_to_latex" style="max-width: 100%; width: auto; height: auto; max-height: 450px;">

@@ -6,7 +6,7 @@ Browse available LaTeX table styles. Click a preview to see full usage, argument
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
     <a href="collection/grouped_multicol_latex.html">
-      <img src="../_images/grouped_multicol_latex.png" alt="grouped_multicol_latex" style="max-height: 100%; max-width: 100%;">
+      <img src="../_static/images/tables/grouped_multicol_latex.png" alt="grouped_multicol_latex" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/grouped_multicol_latex.html">grouped_multicol_latex</a></h4>
@@ -16,7 +16,7 @@ Browse available LaTeX table styles. Click a preview to see full usage, argument
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
     <a href="collection/simple_df_to_latex.html">
-      <img src="../_images/simple_df_to_latex.png" alt="simple_df_to_latex" style="max-height: 100%; max-width: 100%;">
+      <img src="../_static/images/tables/simple_df_to_latex.png" alt="simple_df_to_latex" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/simple_df_to_latex.html">simple_df_to_latex</a></h4>

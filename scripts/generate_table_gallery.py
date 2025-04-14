@@ -31,7 +31,7 @@ def generate_gallery():
     entries = []
 
     for name, info in table_registry.items():
-        img_path = f"../_images/{info.get('example_image', f'tables/{name}.png')}"
+        img_path = f"../_static/images/tables/{info.get('example_image', f'tables/{name}.png')}"
         description = info.get("description", "").strip().split("\n")[0]  # 1-liner
         details_path = f"collection/{name}.html"
 
