@@ -60,7 +60,7 @@ latex_string = table(
     label="tab:combo_results"
 )
 ```
-![Complex Table](./res/complex-table.png)
+![Complex Table](./res/readme/complex-table.png)
 
 ---
 
