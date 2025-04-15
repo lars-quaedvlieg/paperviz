@@ -51,7 +51,7 @@ latex_string = table(
     label="tab:combo_results"
 )
 ```
-![Complex Table](docs/_static/images/table/grouped_multicol_latex.png)
+![Complex Table](docs/_static/images/tables/grouped_multicol_latex.png)
 
 ---
 
