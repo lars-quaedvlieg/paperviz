@@ -59,7 +59,7 @@ from paperviz.table import table
 complex_df = ...
 
 latex_string = table(
-    "results_multilevel_latex",
+    "grouped_multicol_latex",
     df=complex_df,
     row_index="Model",
     col_index=["Split", "Budget"],
