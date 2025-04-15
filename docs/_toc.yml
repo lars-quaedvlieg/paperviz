@@ -5,4 +5,5 @@ chapters:
   - file: tables/index
     sections:
       - file: tables/collection/grouped_multicol_latex
+      - file: tables/collection/grouped_multirow_latex
       - file: tables/collection/simple_df_to_latex
