@@ -1,8 +1,16 @@
 # 📄📊 Paperviz
 
+[![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/paperviz/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-available-blue)](https://lars-quaedvlieg.github.io/paperviz/)
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/paperviz)
+
+
 ![Logo](docs/logo.png)
 
 **Paperviz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure layouts** with minimal code and consistent style.
+[**Check out the live docs**](https://lars-quaedvlieg.github.io/paperviz/) for examples and usage.
 
 Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figures effortless — no more LaTeX hacks and style mismatches. Focus on your results, not your rendering.
 
@@ -69,7 +77,7 @@ pip install .
 
 ## 📚 Documentation
 
-We're building a comprehensive [](https://lars-quaedvlieg.github.io/paperviz/) with:
+We're building a comprehensive [documentation page](https://lars-quaedvlieg.github.io/paperviz/) with:
 - 📊 Plotting gallery
 - 🧾 Table demos with examples
 - 📐 Layout + subfigure examples
