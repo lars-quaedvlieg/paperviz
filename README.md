@@ -8,12 +8,14 @@ Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figur
 
 If you use Paperviz in your research, please consider citing it using:
 ```bibtex
-@misc{paperviz2025,
-  author       = {Lars Quaedvlieg},
-  title        = {Paperviz: Publication-ready plots and LaTeX tables for ML papers},
-  year         = 2025,
-  howpublished = {\url{https://github.com/lars-quaedvlieg/paperviz}},
-  note         = {Version 0.1.0}
+@software{quaedvlieg2025paperviz,
+  author = {Quaedvlieg, Lars},
+  license = {MIT},
+  month = apr,
+  title = {{Paperviz: Publication-ready plots and LaTeX tables for ML papers}},
+  url = {https://github.com/lars-quaedvlieg/paperviz},
+  version = {0.1.0},
+  year = {2025}
 }
 ```
 
