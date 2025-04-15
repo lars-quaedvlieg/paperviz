@@ -31,10 +31,22 @@ If you use Paperviz in your research, please consider citing it using:
 
 ## 🚀 Features
 
-- 📊 One-liner **plotting functions**
 - 🧾 Auto-generated **LaTeX tables** from your data
-- 🧩 Easy **layout builders** for stacked, grid, and subfigure formats
-- 📚 Expanding **Jupyter Book** documentation with live examples
+- 📊 One-liner **plotting functions** **[COMING SOON]**
+- 🧩 Easy **layout builders** for stacked, grid, and subfigure formats **[COMING SOON]**
+- 📚 Expanding **Jupyter Book** documentation with live examples **[COMING SOON]**
+
+---
+
+## 📦 Installation
+
+```bash
+git clone git@github.com:lars-quaedvlieg/paperviz.git paperviz
+cd paperviz
+pip install .
+```
+
+(Coming soon to PyPI)
 
 ---
 
@@ -63,27 +75,6 @@ latex_string = table(
 
 ---
 
-## 📦 Installation
-
-```bash
-git clone git@github.com:lars-quaedvlieg/paperviz.git paperviz
-cd paperviz
-pip install .
-```
-
-(Coming soon to PyPI)
-
----
-
-## 📚 Documentation
-
-We're building a comprehensive [documentation page](https://lars-quaedvlieg.github.io/paperviz/) with:
-- 📊 Plotting gallery
-- 🧾 Table demos with examples
-- 📐 Layout + subfigure examples
-
----
-
 ## 📁 Project Structure
 
 | Module       | Description                                                     |
@@ -97,9 +88,9 @@ We're building a comprehensive [documentation page](https://lars-quaedvlieg.gith
 
 ## 🛠️ Roadmap
 
-- [ ] Add plot types (confusion, UMAP, attention, histograms)
-- [ ] Themes: `"neurips"`, `"nature"`, `"cvpr"`, ...
+- [ ] Add plot types (confusion, UMAP, attention, histograms, etc.)
 - [ ] W&B / MLflow integration
+- [ ] More...
 
 ---
 
