@@ -1,53 +1,49 @@
-# 👋 Welcome to **paperviz**
+# 📄📊 Welcome to **Paperviz**
 
-**Paperviz** is a Python library for generating **publication-quality visualizations**, **LaTeX tables**, and **figure layouts** with minimal code and maximum consistency.
-
-It’s designed for researchers submitting to conferences like NeurIPS, ICLR, CVPR, ICML — where presentation matters, and time is tight.
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/lars-quaedvlieg/paperviz) [![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/paperviz/releases) [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/) [![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/paperviz)
 
 ---
 
-## ✨ What can paperviz do?
+**Paperviz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure
+layouts** — with minimal code and consistent style. 
 
-- 📊 Quickly render **beautiful plots** using one-liner wrappers around Seaborn
-- 🧾 Generate **LaTeX tables** with:
-- 🧩 Compose **layouts of images or plots** (e.g. side-by-side, grid)
-- ⚙️ Convert Hydra configs or experiment logs into readable tables
+It’s built for AI/ML researchers targeting NeurIPS, ICLR, CVPR, ICML and beyond — where *presentation matters*, and time
+is tight. No more LaTeX hacks, manually resizing plots, or formatting inconsistencies. Just clean results, fast.
 
----
-
-## 📚 How to use this site
-
-Use the sidebar to browse examples:
-- Each page shows a specific **function**, its purpose, and how to use it
-- Most include:
-  - ✅ Example code
-  - 📸 Output preview
-  - 📎 LaTeX snippet (if relevant)
-
-This is your visual reference to quickly compare table styles, figure layouts, and more.
+Head over to the [**GitHub repository**](https://github.com/lars-quaedvlieg/paperviz) to get started, explore the code, or contribute!
 
 ---
 
-## 💡 Philosophy
+## 🧭 What’s in this guide?
+
+Use the sidebar to explore:
+
+| Section             | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| 🧾 **Table Gallery** | Auto-generated LaTeX tables with varying complexity                |
+| 📊 **Plotting**     | Coming soon — beautifully styled plots built on Seaborn/Matplotlib |
+| 🧩 **Layouts**      | Coming soon — Easily arrange subfigures side-by-side or in grids   |
+| ⚙️ **Utils**        | Coming soon — LaTeX config generators, formatters, and helpers     |
+
+Each individual visualization page includes:
+
+- ✅ Example code
+- 📸 Rendered output
+
+So that you need *minimal* effort to format your data and generate your visualizations!
+
+---
+
+## 💡 Why use Paperviz?
 
 > Great papers don’t just have great ideas — they *look* great too.
 
-Paperviz helps you present your research clearly and beautifully, without spending hours hacking LaTeX or resizing plots by hand.
+Paperviz helps you:
 
----
+- Communicate your results with clarity
+- Reduce time spent on formatting
+- Maintain consistency across plots, tables, and layouts
 
-## 🛠️ Installing
-
-```bash
-pip install paperviz
-```
-
-(Coming soon to PyPI.)
-
----
-
-## 📬 Questions / Feedback?
-
-Open an issue or start a discussion on [GitHub](https://github.com/lars-quaedvlieg/paperviz).
+Built to streamline your research workflow — not replace it.
 
 ---
