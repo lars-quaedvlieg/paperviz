@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use paperviz in your research, please consider citing it using the following metadata."
+title: "Paperviz: Publication-ready plots and LaTeX tables for ML papers"
+version: 0.1.0
+authors:
+  - family-names: Quaedvlieg
+    given-names: Lars
+    affiliation: EPFL
+    orcid: https://orcid.org/0000-0002-0109-5705  # Replace with your ORCID if available
+date-released: 2025-04-15
+keywords:
+  - machine learning
+  - visualization
+  - latex
+  - academic writing
+  - plots
+repository-code: https://github.com/lars-quaedvlieg/paperviz
+license: MIT

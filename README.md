@@ -1,47 +1,36 @@
-# 📄📊 paperviz
+# 📄📊 Paperviz
+
+![Logo](docs/logo.png)
 
 **Paperviz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure layouts** with minimal code and consistent style.
 
-Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figures effortless — no more LaTeX hacks, pixel wrangling, or style mismatches. Focus on your results, not your rendering.
+Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figures effortless — no more LaTeX hacks and style mismatches. Focus on your results, not your rendering.
+
+If you use Paperviz in your research, please consider citing it using:
+```bibtex
+@misc{paperviz2025,
+  author       = {Lars Quaedvlieg},
+  title        = {Paperviz: Publication-ready plots and LaTeX tables for ML papers},
+  year         = 2025,
+  howpublished = {\url{https://github.com/lars-quaedvlieg/paperviz}},
+  note         = {Version 0.1.0}
+}
+```
 
 ---
 
 ## 🚀 Features
 
 - 📊 One-liner **plotting functions**
-- 🧾 Auto-generated **LaTeX table code** from pandas DataFrames
+- 🧾 Auto-generated **LaTeX tables** from your data
 - 🧩 Easy **layout builders** for stacked, grid, and subfigure formats
-- ⚙️ Table export from **Hydra/OmegaConf** configs and experiment logs
-- 🧠 Unified **style system** (fonts, sizes, spacing)
-- 📚 **Jupyter Book** documentation with live examples
+- 📚 Expanding **Jupyter Book** documentation with live examples
 
 ---
 
 ## 🧪 Examples
 
-**Simple LaTeX table from lists:**
-```python
-from paperviz.table import table
-import pandas as pd
-
-df = pd.DataFrame({
-    "Model": ["A", "B"],
-    "acc": [[0.85, 0.88, 0.87], [0.90, 0.91, 0.89]],
-    "f1": [[0.83, 0.83, 0.83], [0.92, 0.93, 0.93]],
-})
-
-latex_string = table(
-    "results_latex",
-    df,
-    highlight={"acc": "max", "f1": "min"},
-    stderr=True,
-    caption="CIFAR-10 results",
-    label="tab:cifar10"
-)
-```
-![Simple Table](docs/_static/images/table/simple_df_to_latex.png)
-
-**Grouped 4-level index table:**
+**Multi-level table example:**
 ```python
 from paperviz.table import table
 
@@ -67,7 +56,9 @@ latex_string = table(
 ## 📦 Installation
 
 ```bash
-pip install paperviz
+git clone git@github.com:lars-quaedvlieg/paperviz.git paperviz
+cd paperviz
+pip install .
 ```
 
 (Coming soon to PyPI)
@@ -76,22 +67,21 @@ pip install paperviz
 
 ## 📚 Documentation
 
-We're building a full [Jupyter Book site](https://your-link-here.com) with:
+We're building a comprehensive [](https://lars-quaedvlieg.github.io/paperviz/) with:
 - 📊 Plotting gallery
+- 🧾 Table demos with examples
 - 📐 Layout + subfigure examples
-- 🧾 Table demos with config
-- 📎 LaTeX integration guides
 
 ---
 
 ## 📁 Project Structure
 
-| Module       | Description |
-|--------------|-------------|
-| `paperviz.table`  | Table generators |
-| `paperviz.plot`   | Plotting utilities built on Seaborn & Matplotlib |
-| `paperviz.layout` | Layout builders for stacked / side-by-side images |
-| `paperviz.utils`  | Formatters, LaTeX helpers, config exporters |
+| Module       | Description                                                     |
+|--------------|-----------------------------------------------------------------|
+| `paperviz.table`  | Table generators                                                |
+| `paperviz.plot`   | [COMING SOON] Plotting utilities built on Seaborn & Matplotlib  |
+| `paperviz.layout` | [COMING SOON] Layout builders for stacked / side-by-side images |
+| `paperviz.utils`  | [COMING SOON] Formatters, LaTeX helpers, config exporters       |
 
 ---
 
@@ -99,14 +89,12 @@ We're building a full [Jupyter Book site](https://your-link-here.com) with:
 
 - [ ] Add plot types (confusion, UMAP, attention, histograms)
 - [ ] Themes: `"neurips"`, `"nature"`, `"cvpr"`, ...
-- [ ] LaTeX PDF + PNG export
 - [ ] W&B / MLflow integration
-- [ ] Citation cards / figure references
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are very welcome! See `CONTRIBUTING.md` (coming soon) for setup and module structure.
+Contributions are very welcome! See `CONTRIBUTING.md` for setup and module structure.
 
 ---
