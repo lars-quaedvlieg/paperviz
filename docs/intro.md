@@ -1,4 +1,4 @@
-# 📄📊 Welcome to **Paperviz**
+# 📄 Welcome to **Paperviz**
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?logo=github)](https://github.com/lars-quaedvlieg/paperviz) [![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/paperviz/releases) [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/) [![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/paperviz)
 

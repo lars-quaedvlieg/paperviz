@@ -1,5 +1,5 @@
-from ._registry import register_table
-from ._utils import format_cell
+from paperviz.tables._registry import register_table
+from paperviz.utils.table import format_cell
 
 @register_table(
     name="grouped_multicol_latex",

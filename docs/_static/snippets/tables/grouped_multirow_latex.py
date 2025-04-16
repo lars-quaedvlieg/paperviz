@@ -1,3 +1,7 @@
+import numpy as np
+import pandas as pd
+from paperviz import table
+
 np.random.seed(0)
 
 domains = ["HalfCheetah", "Hopper", "Walker2d", "Ant"]

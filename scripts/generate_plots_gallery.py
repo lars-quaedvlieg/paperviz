@@ -1,13 +1,14 @@
 import os
-from paperviz.tables._registry import table_registry
 
-GALLERY_PATH = "docs/tables/index.md"
+from paperviz.plots._registry import plot_registry
+
+GALLERY_PATH = "docs/plots/index.md"
 DETAILS_DIR = "collection/"  # where individual md files live
 
 CARD_TEMPLATE = """\
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
-    <a href="{img_path}">
+    <a href="{details_path}">
       <img src="{img_path}" alt="{name}" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
@@ -17,9 +18,9 @@ CARD_TEMPLATE = """\
 """
 
 TEMPLATE = """\
-# 📊 Table Formats
+# 📈 Plot Gallery
 
-Browse available LaTeX table styles. Click a preview to see full usage, arguments, and output.
+Browse available plotting functions and their outputs. Click a preview to see full usage and examples.
 
 <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-start;">
 {gallery_entries}
@@ -30,8 +31,8 @@ Browse available LaTeX table styles. Click a preview to see full usage, argument
 def generate_gallery():
     entries = []
 
-    for name, info in table_registry.items():
-        img_path = f"../_static/images/tables/{info.get('example_image', f'tables/{name}.png')}"
+    for name, info in plot_registry.items():
+        img_path = f"../_static/images/plots/{info.get('example_image', f'tables/{name}.png')}"
         description = info.get("description", "").strip().split("\n")[0]  # 1-liner
         details_path = f"collection/{name}.html"
 

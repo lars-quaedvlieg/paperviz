@@ -89,6 +89,7 @@ latex_string = table(
 ## 🛠️ Roadmap
 
 - [ ] Add plot types (confusion, UMAP, attention, histograms, etc.)
+- [ ] Add Manim integrations for dynamic plot videos and function evolutions, etc.
 - [ ] W&B / MLflow integration
 - [ ] More...
 

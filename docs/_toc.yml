@@ -7,3 +7,7 @@ chapters:
       - file: tables/collection/grouped_multicol_latex
       - file: tables/collection/grouped_multirow_latex
       - file: tables/collection/simple_df_to_latex
+  - file: plot_themes/index
+  - file: plots/index
+    sections:
+      - file: plots/collection/multiple_std_lines

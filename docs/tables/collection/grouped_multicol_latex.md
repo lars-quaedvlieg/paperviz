@@ -43,6 +43,10 @@
 
 ````{dropdown} Click to show example code
 ```python
+import numpy as np
+import pandas as pd
+from paperviz import table
+
 # Config
 tasks = ["Bin Packing", "TSP", "Flat Pack"]
 models = ["LLaMA FunSearch", "LLaMA Method", "Phi FunSearch", "Phi Method", "Granite FunSearch", "Granite Method"]
@@ -55,12 +59,14 @@ index = pd.MultiIndex.from_product([tasks, models, splits, budgets], names=["Tas
 # Random generator with slight bias per method
 np.random.seed(42)
 
+
 def simulate_scores(model):
     base = {
         "FunSearch": 4.5,
         "Method": 3.5,
     }["Method" if "Method" in model else "FunSearch"]
     return [round(np.random.normal(loc=base, scale=0.1), 3) for _ in range(3)]
+
 
 # Fill DataFrame
 data = {"score": [simulate_scores(model) for (_, model, _, _) in index]}

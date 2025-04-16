@@ -1,5 +1,5 @@
 from paperviz.tables._registry import register_table
-from paperviz.tables._utils import format_cell
+from paperviz.utils.table import format_cell
 
 
 @register_table(
