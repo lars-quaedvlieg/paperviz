@@ -15,11 +15,7 @@ data_dict = {
 }
 
 # Color map where 'Reward' is assigned blue and 'Goal' is assigned pink
-color_map = {
-    "Accuracy": "#9FB3DF",
-    "Precision": "#FFF1D5",
-    "Recall": "#BDDDE4"
-}
+
 
 # Style map for each metric (hatch patterns for filling)
 style_map = {
@@ -28,5 +24,5 @@ style_map = {
     "Recall": 'x'  # Cross hatch pattern for Recall
 }
 
-plot("general_bar_plot",data_dict,color_map=color_map,style_map=style_map,save="bar")
+plot("general_bar_plot",data_dict,style_map=style_map,save="bar")
 plt.show()

@@ -43,7 +43,8 @@ def plot(
     metrics = list(data_dict[next(iter(data_dict))].keys())
 
     if not color_map:
-        color_map = {metric: mcolors.CSS4_COLORS[list(mcolors.CSS4_COLORS.keys())[i % len(mcolors.CSS4_COLORS)]] for i, metric in enumerate(metrics)}
+        # make all colors = None
+        color_map = {metric: None for metric in metrics}
 
     if not style_map:
         style_map = {metric: '/' for metric in metrics}
@@ -54,17 +55,18 @@ def plot(
         metric_values = [data[metric] for data in data_dict.values()]
 
         metric_color = color_map[metric]
-        metric_dark = mcolors.to_rgba(metric_color, alpha=1.0)
-        metric_dark = mcolors.to_hex([min(1, c * 0.6) for c in metric_dark[:3]])
         hatch = style_map.get(metric, '/')
 
         bar_positions = indices + (i - len(metrics) / 2) * bar_width
         bar_positions_list.append(bar_positions)
         bar_container = ax.bar(bar_positions, metric_values, bar_width,
-                               label=metric, color=metric_color, edgecolor=metric_dark, linewidth=1, hatch=hatch)
+                               label=metric, color=metric_color, linewidth=1, hatch=hatch)
         bar_containers.append(bar_container)
 
         for rect in bar_container:
+            metric_dark=mcolors.to_rgba(rect.get_facecolor(), alpha=1.0)
+            metric_dark=mcolors.to_hex([min(1, c * 0.6) for c in metric_dark[:3]])
+            rect.set_edgecolor(metric_dark)
             height = rect.get_height()
             ax.text(rect.get_x() + rect.get_width() / 2, height + 0.1, f'{height:.1f}', ha='center', va='bottom',
                     color=metric_dark, fontweight='bold', fontsize=12)
