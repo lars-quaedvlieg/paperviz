@@ -93,8 +93,6 @@ def plot(
     if xlim: ax.set_xlim(xlim)
     if ylim: ax.set_ylim(ylim)
 
-    plt.tight_layout()
-
     if save:
         plt.savefig(f"{save}.png", dpi=300, bbox_inches="tight")
         plt.savefig(f"{save}.pdf", dpi=300, bbox_inches="tight")

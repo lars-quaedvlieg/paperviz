@@ -29,6 +29,10 @@ def generate_toc():
     for name in sorted(plot_registry.keys()):
         toc_lines.append(f"      - file: plots/collection/{name}")
 
+    toc_lines.extend([
+        "  - file: layout/index",
+    ])
+
     # Write to file
     with open(TOC_PATH, "w") as f:
         f.write("\n".join(toc_lines))

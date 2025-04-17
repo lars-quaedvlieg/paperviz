@@ -32,10 +32,13 @@ def plot(
         bar_width=0.25,
         color_map=None,
         style_map=None,
-        save=None
-        
+        save=None,
+        ax=None,
 ):
-    fig, ax = plt.subplots(figsize=figsize)
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+    else:
+        fig = ax.figure  # Use the one passed by layout
 
     categories = list(data_dict.keys())
     indices = np.arange(len(categories))
@@ -82,7 +85,8 @@ def plot(
     ax.set_xticks(center_indices)
     ax.set_xticklabels(categories)
 
-    ax.legend(loc=legend_loc, frameon=True, edgecolor='grey', facecolor='white', framealpha=0.7, ncol=len(metrics))
+    if legend_loc is not None:
+        ax.legend(loc=legend_loc, ncol=len(metrics))
     ax.set_title(title)
 
     plt.tight_layout()
