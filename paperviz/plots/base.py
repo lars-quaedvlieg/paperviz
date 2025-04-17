@@ -21,45 +21,98 @@ def register_theme(name, example_image=None):
 @register_theme("nature", example_image="nature.png")
 def nature_theme():
     return {
-        "font": "Arial",
-        "font_size": 14,
-        "grid": False,
-        "grid_style": "-",
-        "grid_alpha": 0.4,
-        "color_palette": "deep",
-        "linewidth": 1.5,
-        "style": "seaborn-v0_8-white",
-        "dpi": 300,
+        "font.family": "Arial",
+        "axes.titlesize": 14,
+        "axes.labelsize": 14,
+        "xtick.labelsize": 14,
+        "ytick.labelsize": 14,
+        "legend.fontsize": 14,
+        "legend.frameon": True,
+        "legend.framealpha": 0.9,
+        "legend.edgecolor": "black",
+        "legend.handlelength": 1.5,
+        "axes.grid": False,
+        "grid.linestyle": "-",
+        "grid.alpha": 0.4,
+        "lines.linewidth": 1.5,
+        "figure.dpi": 300,
+        "style": "seaborn-v0_8-white",  # special key (we'll pop it)
+        "color_palette": "deep",  # special key (same)
     }
 
 
 @register_theme("latex", example_image="latex.png")
 def latex_theme():
     return {
-        "font": "Times New Roman",
-        "font_size": 18,
-        "grid": True,
-        "grid_style": "--",
-        "grid_alpha": 0.7,
-        "color_palette": "colorblind",
-        "linewidth": 2.5,
-        "style": "seaborn-v0_8-whitegrid",
-        "dpi": 300,
+        # === Fonts ===
+        "font.family": "Times New Roman",  # Classic serif font for paper aesthetics
+        "font.size": 18,  # Base font size (can be overridden below)
+
+        # === Axes ===
+        "axes.labelsize": 18,  # Axis label font size
+        "axes.titlesize": 18,  # Title font size
+        "axes.labelpad": 6.0,  # Padding between axis and label
+        "axes.labelcolor": "black",  # Label font color
+        "axes.linewidth": 1.0,  # Thickness of axis borders
+        "axes.grid": True,  # Enable grid by default
+        "axes.grid.axis": "both",  # Grid lines for both axes
+        "axes.spines.top": False,  # Hide top spine
+        "axes.spines.right": False,  # Hide right spine
+
+        # === Grid ===
+        "grid.linestyle": "--",  # Dashed grid lines
+        # "grid.linewidth": 0.5,  # Thin grid lines
+        "grid.alpha": 0.3,  # Slight transparency
+        "grid.color": "gray",  # Neutral grid color
+
+        # === Ticks ===
+        "xtick.labelsize": 16, # x-axis label size
+        "ytick.labelsize": 16, # y-axis label size
+
+        # === Figure ===
+        "figure.dpi": 300,  # High-res export
+        "figure.figsize": (8, 5),  # Default figure size
+        "figure.facecolor": "white",  # Background for saved figures
+        "figure.autolayout": True,  # Avoid overlap
+
+        # === Lines ===
+        "lines.linewidth": 2.5,  # Thicker lines for visibility
+        "lines.markersize": 6,  # Reasonable default marker size
+
+        # === Legend ===
+        "legend.frameon": True,
+        "legend.framealpha": 0.9,
+        "legend.edgecolor": "grey",
+        "legend.fontsize": 16,
+        "legend.handlelength": 1.5,
+        "legend.loc": "best",
+
+        # === Style + Palette (handled outside rcParams) ===
+        "style": "seaborn-v0_8-whitegrid",  # Classic whitegrid with slight polish
+        "color_palette": "colorblind",  # Nice default for publication safety
     }
 
 
 @register_theme("dark_latex", example_image="dark_latex.png")
 def dark_latex_theme():
     return {
-        "font": "Times New Roman",  # Clean monospace
-        "font_size": 18,
-        "grid": True,
-        "grid_style": "--",
-        "grid_alpha": 0.3,
-        "color_palette": "dark",  # seaborn dark palette
-        "linewidth": 2.5,
-        "style": "dark_background",  # matplotlib built-in
-        "dpi": 300,
+        "font.family": "Times New Roman",
+        "axes.titlesize": 18,
+        "axes.labelsize": 18,
+        "xtick.labelsize": 18,
+        "ytick.labelsize": 18,
+        "legend.fontsize": 18,
+        "legend.frameon": True,
+        "legend.framealpha": 0.9,
+        "legend.edgecolor": "grey",
+        "legend.handlelength": 1.5,
+        "axes.grid": True,
+        "grid.linestyle": "--",
+        "grid.alpha": 0.3,
+        "lines.linewidth": 2.5,
+        "figure.dpi": 300,
+        "style": "dark_background",
+        "color_palette": "dark",
     }
 
 
@@ -67,26 +120,23 @@ def set_style(theme="latex", **overrides):
     if theme not in theme_registry:
         raise ValueError(f"Theme '{theme}' not found. Available themes: {list(theme_registry.keys())}")
 
+    # Reset to default
+    mpl.rcParams.update(mpl.rcParamsDefault)
+    plt.style.use('default')
+    sns.set_palette("tab10")
+
+    # Configs
     config = theme_registry[theme]["func"]()
     config.update(overrides)
 
-    # Apply general styles
-    plt.style.use(config["style"])
-    sns.set_palette(config["color_palette"])
+    # Special cases (non-rcParams)
+    style = config.pop("style", None)
+    palette = config.pop("color_palette", None)
 
-    font = config["font"]
-    font_size = config["font_size"]
+    if style:
+        plt.style.use(style)
+    if palette:
+        sns.set_palette(palette)
 
-    mpl.rcParams.update({
-        "font.family": font,
-        "axes.titlesize": font_size,
-        "axes.labelsize": font_size,
-        "xtick.labelsize": font_size,
-        "ytick.labelsize": font_size,
-        "legend.fontsize": font_size,
-        "axes.grid": config["grid"],
-        "grid.linestyle": config["grid_style"],
-        "grid.alpha": config["grid_alpha"],
-        "lines.linewidth": config["linewidth"],
-        "figure.dpi": config["dpi"],
-    })
+    # Apply all rcParams
+    mpl.rcParams.update(config)

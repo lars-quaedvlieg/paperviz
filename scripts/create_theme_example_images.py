@@ -34,7 +34,7 @@ if __name__ == '__main__':
         },
     }
 
-    for theme in theme_registry.keys():
+    for theme in ["latex"]: # theme_registry.keys():
         set_style(theme)
 
         fig, ax = plot(
@@ -50,11 +50,11 @@ if __name__ == '__main__':
                 "reverse-method": "dashed",
                 "baseline": "dotted",
             },
-            color_map={
-                "forward-method": "#CC79A7",
-                "reverse-method": "#0072B2",
-                "baseline": "#009E73",
-            },
+            # color_map={
+            #     "forward-method": "#CC79A7",
+            #     "reverse-method": "#0072B2",
+            #     "baseline": "#009E73",
+            # },
             xlabel="Round Number",
             ylabel="Number of Unique Scores",
             xlim=(250, 2900),

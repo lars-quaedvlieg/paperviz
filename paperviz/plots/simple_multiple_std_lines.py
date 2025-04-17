@@ -2,6 +2,8 @@ from paperviz.plots._registry import register_plot
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 
+from paperviz.utils.plot import apply_legend
+
 
 @register_plot(
     name="multiple_std_lines",
@@ -56,8 +58,12 @@ def plot(
         x_formatter=None,
         y_formatter=None,
         save=None,
+        ax=None,
 ):
-    fig, ax = plt.subplots(figsize=figsize)
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+    else:
+        fig = ax.figure  # Use the one passed by layout
 
     for label, data in data_dict.items():
         display_name = label_map.get(label, label) if label_map else label
@@ -68,12 +74,12 @@ def plot(
         y = data[y_key]
         yerr = data[yerr_key]
 
-        ax.plot(x, y, label=display_name, color=color, linestyle=linestyle)
-        ax.fill_between(x, y - yerr, y + yerr, color=color, alpha=0.2)
+        line, = ax.plot(x, y, label=display_name, color=color, linestyle=linestyle)
+        fill_color = color if color is not None else line.get_color()
+        ax.fill_between(x, y - yerr, y + yerr, color=fill_color, alpha=0.2)
 
-    legend = ax.legend(loc=legend_loc, frameon=True, handlelength=1.5)
-    legend.get_frame().set_edgecolor("grey")
-    legend.get_frame().set_alpha(0.9)
+    if legend_loc:
+        ax.legend(loc=legend_loc)
 
     # Formatters
     if x_formatter:
