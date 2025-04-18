@@ -6,6 +6,7 @@ chapters:
     sections:
       - file: tables/collection/grouped_multicol_latex
       - file: tables/collection/grouped_multirow_latex
+      - file: tables/collection/multiple_grouped_cols
       - file: tables/collection/simple_df_to_latex
   - file: plot_themes/index
   - file: plots/index
