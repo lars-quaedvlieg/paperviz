@@ -27,6 +27,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Install paperviz
+        run: pip install .
+
+      - name: Install Times New Roman and clear matplotlib cache
+        run: |
+          sudo apt-get update
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+          sudo apt-get install -y ttf-mscorefonts-installer fontconfig
+          rm -rf ~/.cache/matplotlib
+
       - name: Cache executed notebooks (optional)
         uses: actions/cache@v4
         with:

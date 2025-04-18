@@ -18,12 +18,11 @@ Head over to the [**GitHub repository**](https://github.com/lars-quaedvlieg/pape
 
 Use the sidebar to explore:
 
-| Section             | Description                                                        |
-|---------------------|--------------------------------------------------------------------|
-| 🧾 **Table Gallery** | Auto-generated LaTeX tables with varying complexity                |
-| 📊 **Plotting**     | Coming soon — beautifully styled plots built on Seaborn/Matplotlib |
-| 🧩 **Layouts**      | Coming soon — Easily arrange subfigures side-by-side or in grids   |
-| ⚙️ **Utils**        | Coming soon — LaTeX config generators, formatters, and helpers     |
+| Section         | Description                                                      |
+|-----------------|------------------------------------------------------------------|
+| 🧾 **Tables**   | Auto-generated LaTeX tables with varying complexity              |
+| 📊 **Plotting** | Beautifully styled plots built on Seaborn/Matplotlib             |
+| 🧩 **Layouts**  | Easily arrange subfigures side-by-side or in grids |
 
 Each individual visualization page includes:
 
@@ -44,6 +43,6 @@ Paperviz helps you:
 - Reduce time spent on formatting
 - Maintain consistency across plots, tables, and layouts
 
-Built to streamline your research workflow — not replace it.
+Built to streamline your research workflow.
 
 ---

@@ -17,7 +17,7 @@ CARD_TEMPLATE = """\
 """
 
 TEMPLATE = """\
-# 📊 Table Formats
+# 🧾 Table Formats
 
 Browse available LaTeX table styles. Click a preview to see full usage, arguments, and output.
 

@@ -94,6 +94,9 @@ class LegendBlock:
         ax = fig.add_axes(pos)
         ax.axis("off")
 
+        if self.handles is None or not self.handles:
+            return ax  # Skip rendering legend for now
+
         legend = ax.legend(
             handles=self.handles,
             labels=self.labels,

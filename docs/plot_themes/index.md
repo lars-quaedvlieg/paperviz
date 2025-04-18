@@ -1,4 +1,4 @@
-# 🎨 Style Gallery
+# 🎨 Themes Overview
 
 Paperviz comes with built-in visual themes for plots, inspired by common publication styles, or dark-mode aesthetics.
 

@@ -18,7 +18,7 @@ CARD_TEMPLATE = """\
 """
 
 TEMPLATE = """\
-# 📈 Plot Gallery
+# 📊 Plot Gallery
 
 Browse available plotting functions and their outputs. Click a preview to see full usage and examples.
 

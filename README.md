@@ -32,9 +32,9 @@ If you use Paperviz in your research, please consider citing it using:
 ## 🚀 Features
 
 - 🧾 Auto-generated **LaTeX tables** from your data
-- 📊 One-liner **plotting functions** **[COMING SOON]**
-- 🧩 Easy **layout builders** for stacked, grid, and subfigure formats **[COMING SOON]**
-- 📚 Expanding **Jupyter Book** documentation with live examples **[COMING SOON]**
+- 📊 One-liner **plotting functions**
+- 🧩 Easy **layout builders** for stacked, grid, and subfigure formats
+- 📚 Expanding **Jupyter Book** documentation with live examples
 
 ---
 
@@ -47,6 +47,16 @@ pip install .
 ```
 
 (Coming soon to PyPI)
+
+---
+
+## 📁 Project Structure
+
+| Module       | Description                                                    |
+|--------------|----------------------------------------------------------------|
+| `paperviz.table`  | Table generators                                               |
+| `paperviz.plot`   | Plotting utilities built on Seaborn & Matplotlib               |
+| `paperviz.layout` | Layout builders for stacked / side-by-side images              |
 
 ---
 
@@ -73,25 +83,65 @@ latex_string = table(
 ```
 ![Complex Table](docs/_static/images/tables/grouped_multicol_latex.png)
 
----
+**Simple bar chart example:**
+```python
+from matplotlib import pyplot as plt
+from paperviz import plot
 
-## 📁 Project Structure
+data_dict = ...
 
-| Module       | Description                                                     |
-|--------------|-----------------------------------------------------------------|
-| `paperviz.table`  | Table generators                                                |
-| `paperviz.plot`   | [COMING SOON] Plotting utilities built on Seaborn & Matplotlib  |
-| `paperviz.layout` | [COMING SOON] Layout builders for stacked / side-by-side images |
-| `paperviz.utils`  | [COMING SOON] Formatters, LaTeX helpers, config exporters       |
+# Style map for each metric (hatch patterns for filling)
+style_map = {
+    "Accuracy": '',
+    "Precision": '\\',
+    "Recall": 'x'  # Cross hatch pattern for Recall
+}
+
+plot("general_bar_plot", data_dict, style_map=style_map, save="bar")
+plt.show()
+```
+![Bar Chart](docs/_static/images/plots/general_bar_plot.png)
+
+**Complex nested layouts:**
+```python
+from paperviz.layout.blocks import Row, Col, LegendBlock, Label
+from paperviz.layout import render_layout
+from matplotlib import pyplot as plt
+
+plot1, plot2, plot3 = ...
+
+nested_layout = Col([
+    Row([
+        LegendBlock(labels=["Accuracy", "Precision", "Recall"], ncol=3, fixed_width=0.35),
+        LegendBlock(labels=["Forward KL", "Reverse KL"], ncol=2)
+    ], fixed_height=0.08, spacing=0.15),
+    Row([
+        Col([
+            plot3,
+            Label("(a) Bar chart",  align="center", fixed_height=0.05), 
+        ]),
+        Col([
+            plot1, 
+            Label("(b) Line plot 1",  align="center", fixed_height=0.05), 
+            plot2, 
+            Label("(c) Line plot 2",  align="center", fixed_height=0.05)
+        ], spacing=0.07)
+    ], spacing=0.1), 
+], spacing=0.02)
+
+fig = render_layout(nested_layout, figsize=(10, 8))
+plt.show()
+```
+![Complex Layout](docs/_static/images/layout/complex_layout.png)
 
 ---
 
 ## 🛠️ Roadmap
 
-- [ ] Add plot types (confusion, UMAP, attention, histograms, etc.)
+- [ ] Add more plot types (confusion, UMAP, attention, histograms, etc.)
 - [ ] Add Manim integrations for dynamic plot videos and function evolutions, etc.
+- [ ] Add more tables
 - [ ] W&B / MLflow integration
-- [ ] More...
 
 ---
 

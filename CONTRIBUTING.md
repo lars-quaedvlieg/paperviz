@@ -11,9 +11,9 @@ Whether you're fixing a bug, adding a table format, improving docs, or building 
 | Folder                  | Purpose                                                           |
 |--------------------------|-------------------------------------------------------------------|
 | `paperviz/table/`        | Table generators                                                  |
-| `paperviz/plot/`         | [COMING SOON] Plotting utilities (Seaborn + Matplotlib wrappers)  |
-| `paperviz/layout/`       | [COMING SOON] Layout builders for subfigures, grids, side-by-side |
-| `paperviz/utils/`        | [COMING SOON] Formatters, math helpers, config exports            |
+| `paperviz/plot/`         | Plotting utilities (Seaborn + Matplotlib wrappers)  |
+| `paperviz/layout/`       | Layout builders for subfigures, grids, side-by-side |
+| `paperviz/utils/`        | Formatters, math helpers, config exports            |
 | `docs/`                  | Jupyter Book examples and usage guides                            |
 
 ---
