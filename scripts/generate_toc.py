@@ -31,6 +31,8 @@ def generate_toc():
 
     toc_lines.extend([
         "  - file: layout/index",
+        "    sections:",
+        "      - file: layout/built-in-layouts"
     ])
 
     # Write to file

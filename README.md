@@ -52,8 +52,8 @@ pip install .
 
 ## 📁 Project Structure
 
-| Module       | Description                                                    |
-|--------------|----------------------------------------------------------------|
+| Module            | Description                                                    |
+|-------------------|----------------------------------------------------------------|
 | `paperviz.table`  | Table generators                                               |
 | `paperviz.plot`   | Plotting utilities built on Seaborn & Matplotlib               |
 | `paperviz.layout` | Layout builders for stacked / side-by-side images              |
@@ -103,9 +103,10 @@ plt.show()
 ![Bar Chart](docs/_static/images/plots/general_bar_plot.png)
 
 **Complex nested layouts:**
+
 ```python
-from paperviz.layout.blocks import Row, Col, LegendBlock, Label
-from paperviz.layout import render_layout
+from paperviz.layouts.blocks import Row, Col, LegendBlock, Label
+from paperviz.layouts import render_layout
 from matplotlib import pyplot as plt
 
 plot1, plot2, plot3 = ...
@@ -118,15 +119,15 @@ nested_layout = Col([
     Row([
         Col([
             plot3,
-            Label("(a) Bar chart",  align="center", fixed_height=0.05), 
+            Label("(a) Bar chart", align="center", fixed_height=0.05),
         ]),
         Col([
-            plot1, 
-            Label("(b) Line plot 1",  align="center", fixed_height=0.05), 
-            plot2, 
-            Label("(c) Line plot 2",  align="center", fixed_height=0.05)
+            plot1,
+            Label("(b) Line plot 1", align="center", fixed_height=0.05),
+            plot2,
+            Label("(c) Line plot 2", align="center", fixed_height=0.05)
         ], spacing=0.07)
-    ], spacing=0.1), 
+    ], spacing=0.1),
 ], spacing=0.02)
 
 fig = render_layout(nested_layout, figsize=(10, 8))

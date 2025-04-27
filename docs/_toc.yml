@@ -15,3 +15,5 @@ chapters:
       - file: plots/collection/general_horizontal_bar_plot
       - file: plots/collection/multiple_std_lines
   - file: layout/index
+    sections:
+      - file: layout/built-in-layouts
