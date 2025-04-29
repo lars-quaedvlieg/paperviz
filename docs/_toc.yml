@@ -8,7 +8,6 @@ chapters:
       - file: tables/collection/grouped_multirow_latex
       - file: tables/collection/multiple_grouped_cols
       - file: tables/collection/simple_df_to_latex
-  - file: plot_themes/index
   - file: plots/index
     sections:
       - file: plots/collection/dual_histogram_with_errorbars
@@ -21,3 +20,4 @@ chapters:
   - file: layout/index
     sections:
       - file: layout/built-in-layouts
+  - file: plot_themes/index

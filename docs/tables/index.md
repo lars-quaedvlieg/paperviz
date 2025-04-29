@@ -5,22 +5,22 @@ Browse available LaTeX table styles. Click a preview to see full usage, argument
 <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: flex-start;">
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
-    <a href="../_static/images/tables/grouped_multicol_latex.png">
-      <img src="../_static/images/tables/grouped_multicol_latex.png" alt="grouped_multicol_latex" style="max-height: 100%; max-width: 100%;">
-    </a>
-  </div>
-  <h4 style="margin: 0.5rem 0;"><a href="collection/grouped_multicol_latex.html">grouped_multicol_latex</a></h4>
-  <p style="font-size: 0.9rem;">Render a grouped LaTeX table with hierarchical column headers.</p>
-</div>
-
-<div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
-  <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
     <a href="../_static/images/tables/multiple_grouped_cols.png">
       <img src="../_static/images/tables/multiple_grouped_cols.png" alt="multiple_grouped_cols" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/multiple_grouped_cols.html">multiple_grouped_cols</a></h4>
   <p style="font-size: 0.9rem;">Render a grouped LaTeX table with multi-level column headers.</p>
+</div>
+
+<div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
+  <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
+    <a href="../_static/images/tables/grouped_multicol_latex.png">
+      <img src="../_static/images/tables/grouped_multicol_latex.png" alt="grouped_multicol_latex" style="max-height: 100%; max-width: 100%;">
+    </a>
+  </div>
+  <h4 style="margin: 0.5rem 0;"><a href="collection/grouped_multicol_latex.html">grouped_multicol_latex</a></h4>
+  <p style="font-size: 0.9rem;">Render a grouped LaTeX table with hierarchical column headers.</p>
 </div>
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
