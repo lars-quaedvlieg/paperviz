@@ -7,7 +7,7 @@
 [![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/swizz)
 
 
-![Logo](docs/logo.png)
+![Logo](https://raw.githubusercontent.com/lars-quaedvlieg/swizz/refs/heads/main/docs/logo.png)
 
 **Swizz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure layouts** with minimal code and consistent style.
 [**Check out the live docs**](https://lars-quaedvlieg.github.io/swizz/) for examples and usage.
@@ -82,7 +82,7 @@ latex_string = table(
     label="tab:combo_results"
 )
 ```
-![Complex Table](docs/_static/images/tables/grouped_multicol_latex.png)
+![Complex Table](https://raw.githubusercontent.com/lars-quaedvlieg/swizz/refs/heads/main/docs/_static/images/tables/grouped_multicol_latex.png)
 
 **Simple bar chart example:**
 
@@ -102,7 +102,7 @@ style_map = {
 plot("general_bar_plot", data_dict, style_map=style_map, save="bar")
 plt.show()
 ```
-![Bar Chart](docs/_static/images/plots/general_bar_plot.png)
+![Bar Chart](https://raw.githubusercontent.com/lars-quaedvlieg/swizz/refs/heads/main/docs/_static/images/plots/general_bar_plot.png)
 
 **Complex nested layouts:**
 
@@ -135,7 +135,7 @@ nested_layout = Col([
 fig = render_layout(nested_layout, figsize=(10, 8))
 plt.show()
 ```
-![Complex Layout](docs/_static/images/layout/complex_layout.png)
+![Complex Layout](https://raw.githubusercontent.com/lars-quaedvlieg/swizz/refs/heads/main/docs/_static/images/layout/complex_layout.png)
 
 ---
 
