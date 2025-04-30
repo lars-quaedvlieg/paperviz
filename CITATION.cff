@@ -8,8 +8,8 @@ authors:
     affiliation: EPFL
     orcid: https://orcid.org/0000-0002-0109-5705  # Replace with your ORCID if available
   - family-names: Miele
-      given-names: Andrea
-      affiliation: EPFL
+    given-names: Andrea
+    affiliation: EPFL
 date-released: 2025-04-15
 keywords:
   - machine learning
