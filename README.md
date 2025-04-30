@@ -17,7 +17,7 @@ Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figur
 If you use Paperviz in your research, please consider citing it using:
 ```bibtex
 @software{quaedvlieg2025paperviz,
-  author = {Quaedvlieg, Lars},
+  author = {Quaedvlieg, Lars and Miele, Andrea},
   license = {MIT},
   month = apr,
   title = {{Paperviz: Publication-ready plots and LaTeX tables for ML papers}},
