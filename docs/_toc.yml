@@ -10,6 +10,7 @@ chapters:
       - file: tables/collection/simple_df_to_latex
   - file: plots/index
     sections:
+      - file: plots/collection/confusion_matrix
       - file: plots/collection/dual_histogram_with_errorbars
       - file: plots/collection/embedding_2d_plot
       - file: plots/collection/function_percentile_plot
