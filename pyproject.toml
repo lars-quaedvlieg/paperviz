@@ -1,0 +1,29 @@
+[project]
+name = "swizz"
+version = "0.1.0"
+description = "Publication-ready plotting library for ML papers"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Lars Quaedvlieg", email = "larsquaedvlieg@outlook.com"}
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = [
+  "matplotlib>=3.7.5",
+  "seaborn>=0.13.2",
+  "pandas>=2.2.2",
+  "numpy>=1.26.4",
+  "omegaconf>=2.3.0"
+]
+
+[project.optional-dependencies]
+docs = ["jupyter-book>=1.0.4.post1"]
+
+[project.urls]
+Homepage = "https://github.com/lars-quaedvlieg/swizz"
+Documentation = "https://lars-quaedvlieg.github.io/swizz/"
