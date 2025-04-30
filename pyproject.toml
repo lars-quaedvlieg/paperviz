@@ -1,6 +1,6 @@
 [project]
 name = "swizz"
-version = "0.1.1.dev0"
+version = "0.1.1"
 description = "Publication-ready plotting library for ML papers"
 readme = "README.md"
 requires-python = ">=3.10"
