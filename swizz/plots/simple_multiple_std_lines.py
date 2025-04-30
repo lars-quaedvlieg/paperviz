@@ -1,8 +1,8 @@
-from paperviz.plots._registry import register_plot
+from swizz.plots._registry import register_plot
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 
-from paperviz.utils.plot import apply_legend
+from swizz.utils.plot import apply_legend
 
 
 @register_plot(

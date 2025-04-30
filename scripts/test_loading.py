@@ -1,11 +1,11 @@
 # scripts/test_loading.py
 
-from paperviz.logging.logging import load_runs
+from swizz.logging.logging import load_runs
 import pandas as pd
 
 def main():
     # point this at the folder you’ve been writing into
-    root = "paperviz_runs"
+    root = "swizz_runs"
 
     # 1) load everything
     df_all = load_runs(root)

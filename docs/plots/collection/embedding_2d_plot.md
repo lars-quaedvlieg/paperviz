@@ -40,7 +40,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 from sklearn.datasets import make_blobs
 from sklearn.manifold import TSNE
-from paperviz import plot
+from swizz import plot
 
 # 1. Create clustered data
 X, y = make_blobs(

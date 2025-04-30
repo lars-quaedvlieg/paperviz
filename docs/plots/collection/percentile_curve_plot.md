@@ -35,7 +35,7 @@
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from paperviz import plot
+from swizz import plot
 
 # Generate fake scores
 np.random.seed(42)

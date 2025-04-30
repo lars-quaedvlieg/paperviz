@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
-from paperviz.layouts.blocks import PlotBlock, LegendBlock
+from swizz.layouts.blocks import PlotBlock, LegendBlock
 import importlib
 import os
 
 # Dynamically import all .py files in the tables directory (excluding special files)
 for filename in os.listdir(os.path.join(os.path.dirname(__file__), "collection")):
     if filename.endswith(".py") and not filename.startswith(("_", "__")):
-        importlib.import_module(f"paperviz.layouts.collection.{filename[:-3]}")
+        importlib.import_module(f"swizz.layouts.collection.{filename[:-3]}")
 
 
 def render_layout(layout, figsize=(10, 6), margins=0.05):

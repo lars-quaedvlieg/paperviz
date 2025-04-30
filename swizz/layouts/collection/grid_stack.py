@@ -1,5 +1,5 @@
-from paperviz.layouts._registry import register_layout
-from paperviz.layouts.blocks import Row, Col
+from swizz.layouts._registry import register_layout
+from swizz.layouts.blocks import Row, Col
 
 @register_layout(
     name="grid_stack",

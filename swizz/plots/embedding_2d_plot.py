@@ -1,4 +1,4 @@
-from paperviz.plots._registry import register_plot
+from swizz.plots._registry import register_plot
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl

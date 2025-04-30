@@ -2,8 +2,8 @@ if __name__ == '__main__':
     import numpy as np
     from matplotlib import pyplot as plt
 
-    from paperviz import plot
-    from paperviz.plots.base import theme_registry, set_style
+    from swizz import plot
+    from swizz.plots.base import theme_registry, set_style
 
     rounds = np.linspace(250, 2900, 30)
 

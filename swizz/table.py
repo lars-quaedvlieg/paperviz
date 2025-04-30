@@ -1,4 +1,4 @@
-from paperviz.tables._registry import table_registry
+from swizz.tables._registry import table_registry
 
 
 def table(name, *args, **kwargs):

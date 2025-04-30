@@ -36,7 +36,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import pandas as pd
-from paperviz import plot, set_style
+from swizz import plot, set_style
 
 # Example function
 transform_full = lambda r, c, s: ((np.tanh((r + c) / s) + 1) / (1 + np.tanh(c / s))) * 2 - 1

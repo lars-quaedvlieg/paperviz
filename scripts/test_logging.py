@@ -5,12 +5,12 @@ import torch.nn as nn
 import torch.optim as optim
 import wandb
 
-from paperviz.logging.logging import LogTracker, log
+from swizz.logging.logging import LogTracker, log
 
 def main():
     # 1) Initialize W&B
     wandb.init(
-        project="paperviz_test",
+        project="swizz_test",
         name="simple_test",
         config={
             "n_epochs": 3,
@@ -60,7 +60,7 @@ def main():
         }
         # Register and log if any of keys_to_log fired
         if epoch_tracker.register(epoch, epoch_metrics):
-            # This writes both to wandb and to paperviz_runs/<run_name>/
+            # This writes both to wandb and to swizz_runs/<run_name>/
             log(epoch_metrics, run_name=run_name)
 
         for batch_idx in range(batches_per_epoch):
@@ -85,7 +85,7 @@ def main():
             if batch_tracker.register(batch_idx, batch_metrics):
                 log(batch_metrics, run_name=run_name)
 
-    print("Done training. Check wandb and paperviz_runs/… folders.")
+    print("Done training. Check wandb and swizz_runs/… folders.")
 
 if __name__ == "__main__":
     main()

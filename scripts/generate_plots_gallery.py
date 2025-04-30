@@ -1,6 +1,6 @@
 import os
 
-from paperviz.plots._registry import plot_registry
+from swizz.plots._registry import plot_registry
 
 GALLERY_PATH = "docs/plots/index.md"
 DETAILS_DIR = "collection/"  # where individual md files live

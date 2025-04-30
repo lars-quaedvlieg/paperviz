@@ -1,5 +1,5 @@
 import os
-from paperviz.tables._registry import table_registry
+from swizz.tables._registry import table_registry
 
 DOCS_DIR = "docs/tables/collection"
 IMG_DIR = "res/images/tables"

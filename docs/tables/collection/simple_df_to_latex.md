@@ -32,7 +32,7 @@
 ````{dropdown} Click to show example code
 ```python
 import pandas as pd
-from paperviz import table
+from swizz import table
 
 df = pd.DataFrame({
     "Model": ["A", "B"],

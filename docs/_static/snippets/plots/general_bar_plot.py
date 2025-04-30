@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from paperviz import plot
+from swizz import plot
 
 data_dict = {
     "Forward": {

@@ -1,6 +1,6 @@
 # 🎨 Themes Overview
 
-Paperviz comes with built-in visual themes for plots, inspired by common publication styles, or dark-mode aesthetics.
+Swizz comes with built-in visual themes for plots, inspired by common publication styles, or dark-mode aesthetics.
 
 Each theme controls global plot styling:
 - Font and font size
@@ -16,7 +16,7 @@ Each theme controls global plot styling:
 Use `set_style` to apply a theme globally to all plots:
 
 ```python
-from paperviz.plot.base import set_style
+from swizz.plot.base import set_style
 
 # Apply a theme
 set_style("latex")  # This is actually the default theme

@@ -38,7 +38,7 @@
 ```python
 import numpy as np
 import pandas as pd
-from paperviz import table
+from swizz import table
 
 np.random.seed(0)
 

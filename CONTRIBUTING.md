@@ -1,6 +1,6 @@
-# 🤝 Contributing to paperviz
+# 🤝 Contributing to Swizz
 
-Thanks for your interest in contributing to **paperviz**! This project aims to make **beautiful, publication-quality figures and LaTeX outputs** as effortless as possible for researchers.
+Thanks for your interest in contributing to **swizz**! This project aims to make **beautiful, publication-quality figures and LaTeX outputs** as effortless as possible for researchers.
 
 Whether you're fixing a bug, adding a table format, improving docs, or building new layouts — you're very welcome here.
 
@@ -10,10 +10,10 @@ Whether you're fixing a bug, adding a table format, improving docs, or building 
 
 | Folder                  | Purpose                                                           |
 |--------------------------|-------------------------------------------------------------------|
-| `paperviz/table/`        | Table generators                                                  |
-| `paperviz/plot/`         | Plotting utilities (Seaborn + Matplotlib wrappers)  |
-| `paperviz/layout/`       | Layout builders for subfigures, grids, side-by-side |
-| `paperviz/utils/`        | Formatters, math helpers, config exports            |
+| `swizz/table/`        | Table generators                                                  |
+| `swizz/plot/`         | Plotting utilities (Seaborn + Matplotlib wrappers)  |
+| `swizz/layout/`       | Layout builders for subfigures, grids, side-by-side |
+| `swizz/utils/`        | Formatters, math helpers, config exports            |
 | `docs/`                  | Jupyter Book examples and usage guides                            |
 
 ---
@@ -23,8 +23,8 @@ Whether you're fixing a bug, adding a table format, improving docs, or building 
 ### 1. Clone the repo
 
 ```bash
-git clone git@github.com:lars-quaedvlieg/paperviz.git
-cd paperviz
+git clone git@github.com:lars-quaedvlieg/swizz.git
+cd swizz
 ```
 
 ### 2. Set up the environment
@@ -39,22 +39,22 @@ pip install -e .
 
 ## ✅ What You Can Work On
 
-- 📊 Add new table formats (`paperviz/table/`)
-- 🖼️ Add plot utilities with unified style (`paperviz/plot/`)
-- 🧩 Create layout presets (`paperviz/layout/`)
+- 📊 Add new table formats (`swizz/table/`)
+- 🖼️ Add plot utilities with unified style (`swizz/plot/`)
+- 🧩 Create layout presets (`swizz/layout/`)
 - 🐛 Fix issues or formatting bugs
 
 ### Adding a New Table
 
 If you're adding a new table function:
 
-1. Create a file in `paperviz/table/yourfile.py`
+1. Create a file in `swizz/table/yourfile.py`
 2. Register it with the `@register_table` decorator
 3. Fill out all the information inside the decorator arguments. For a good example of this, see below.
 4. Create an example script for this table, focusing on the input format, and put it inside of `docs/_static/snippets/tables`.
 5. Paste the example output into LaTeX and render the table. Put a picture of this table inside `docs/_static/images/tables`.
 
-The codebase will then automatically detect when a new table has been registered, meaning it can be used in the `paperviz.table` method.
+The codebase will then automatically detect when a new table has been registered, meaning it can be used in the `swizz.table` method.
 
 The snippet and output image are automatically compiled into the documentation website, so you do not have to edit the docs! This adding new tables super simple!
 
@@ -101,4 +101,4 @@ In order to push your changes from your local to this repository, follow these g
 
 ## ❤️ Acknowledgements
 
-Paperviz is made by researchers, for researchers. Thank you for helping improve it — every contribution counts!
+Swizz is made by researchers, for researchers. Thank you for helping improve it — every contribution counts!

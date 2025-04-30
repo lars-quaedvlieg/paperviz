@@ -1,27 +1,27 @@
-# 📄📊 Paperviz
+# 📄📊 Swizz
 
-[![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/paperviz/releases)
+[![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/swizz/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-available-blue)](https://lars-quaedvlieg.github.io/paperviz/)
+[![Docs](https://img.shields.io/badge/docs-available-blue)](https://lars-quaedvlieg.github.io/swizz/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/paperviz)
+[![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/swizz)
 
 
 ![Logo](docs/logo.png)
 
-**Paperviz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure layouts** with minimal code and consistent style.
-[**Check out the live docs**](https://lars-quaedvlieg.github.io/paperviz/) for examples and usage.
+**Swizz** is a Python library for generating **publication-ready visualizations**, **LaTeX tables**, and **subfigure layouts** with minimal code and consistent style.
+[**Check out the live docs**](https://lars-quaedvlieg.github.io/swizz/) for examples and usage.
 
 Built for AI/ML researchers, it's designed to make NeurIPS/ICLR/CVPR-style figures effortless — no more LaTeX hacks and style mismatches. Focus on your results, not your rendering.
 
-If you use Paperviz in your research, please consider citing it using:
+If you use Swizz in your research, please consider citing it using:
 ```bibtex
-@software{quaedvlieg2025paperviz,
+@software{quaedvlieg2025swizz,
   author = {Quaedvlieg, Lars and Miele, Andrea},
   license = {MIT},
   month = apr,
-  title = {{Paperviz: Publication-ready plots and LaTeX tables for ML papers}},
-  url = {https://github.com/lars-quaedvlieg/paperviz},
+  title = {{Swizz: Publication-ready plots and LaTeX tables for ML papers}},
+  url = {https://github.com/lars-quaedvlieg/swizz},
   version = {0.1.0},
   year = {2025}
 }
@@ -41,8 +41,8 @@ If you use Paperviz in your research, please consider citing it using:
 ## 📦 Installation
 
 ```bash
-git clone git@github.com:lars-quaedvlieg/paperviz.git paperviz
-cd paperviz
+git clone git@github.com:lars-quaedvlieg/swizz.git swizz
+cd swizz
 pip install .
 ```
 
@@ -54,17 +54,18 @@ pip install .
 
 | Module            | Description                                                    |
 |-------------------|----------------------------------------------------------------|
-| `paperviz.table`  | Table generators                                               |
-| `paperviz.plot`   | Plotting utilities built on Seaborn & Matplotlib               |
-| `paperviz.layout` | Layout builders for stacked / side-by-side images              |
+| `swizz.table`  | Table generators                                               |
+| `swizz.plot`   | Plotting utilities built on Seaborn & Matplotlib               |
+| `swizz.layout` | Layout builders for stacked / side-by-side images              |
 
 ---
 
 ## 🧪 Examples
 
 **Multi-level table example:**
+
 ```python
-from paperviz.table import table
+from swizz.table import table
 
 complex_df = ...
 
@@ -84,9 +85,10 @@ latex_string = table(
 ![Complex Table](docs/_static/images/tables/grouped_multicol_latex.png)
 
 **Simple bar chart example:**
+
 ```python
 from matplotlib import pyplot as plt
-from paperviz import plot
+from swizz import plot
 
 data_dict = ...
 
@@ -105,8 +107,8 @@ plt.show()
 **Complex nested layouts:**
 
 ```python
-from paperviz.layouts.blocks import Row, Col, LegendBlock, Label
-from paperviz.layouts import render_layout
+from swizz.layouts.blocks import Row, Col, LegendBlock, Label
+from swizz.layouts import render_layout
 from matplotlib import pyplot as plt
 
 plot1, plot2, plot3 = ...

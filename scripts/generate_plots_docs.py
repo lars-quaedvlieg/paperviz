@@ -1,6 +1,6 @@
 import os
 
-from paperviz.plots._registry import plot_registry
+from swizz.plots._registry import plot_registry
 
 DOCS_DIR = "docs/plots/collection"
 IMG_DIR = "res/images/plots"

@@ -55,6 +55,16 @@ Browse available plotting functions and their outputs. Click a preview to see fu
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
+    <a href="collection/confusion_matrix.html">
+      <img src="../_static/images/plots/confusion_matrix.png" alt="confusion_matrix" style="max-height: 100%; max-width: 100%;">
+    </a>
+  </div>
+  <h4 style="margin: 0.5rem 0;"><a href="collection/confusion_matrix.html">confusion_matrix</a></h4>
+  <p style="font-size: 0.9rem;">Plot a confusion matrix heatmap with optional normalization and annotations.</p>
+</div>
+
+<div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
+  <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
     <a href="collection/dual_histogram_with_errorbars.html">
       <img src="../_static/images/plots/dual_histogram_with_errorbars.png" alt="dual_histogram_with_errorbars" style="max-height: 100%; max-width: 100%;">
     </a>
@@ -71,16 +81,6 @@ Browse available plotting functions and their outputs. Click a preview to see fu
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/embedding_2d_plot.html">embedding_2d_plot</a></h4>
   <p style="font-size: 0.9rem;">Plot a 2D embedding (e.g., t-SNE, PCA, UMAP) colored by categorical groups or continuous values, with optional density contours, legends, and colorbars.</p>
-</div>
-
-<div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
-  <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
-    <a href="collection/confusion_matrix.html">
-      <img src="../_static/images/plots/confusion_matrix.png" alt="confusion_matrix" style="max-height: 100%; max-width: 100%;">
-    </a>
-  </div>
-  <h4 style="margin: 0.5rem 0;"><a href="collection/confusion_matrix.html">confusion_matrix</a></h4>
-  <p style="font-size: 0.9rem;">Plot a confusion matrix heatmap with optional normalization and annotations.</p>
 </div>
 
 </div>

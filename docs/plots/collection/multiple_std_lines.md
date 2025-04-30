@@ -33,7 +33,7 @@
 ```python
 import numpy as np
 from matplotlib import pyplot as plt
-from paperviz import plot
+from swizz import plot
 
 rounds = np.linspace(250, 2900, 30)
 

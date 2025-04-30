@@ -1,4 +1,4 @@
-from paperviz import table
+from swizz import table
 import pandas as pd
 
 # Sample data in long format

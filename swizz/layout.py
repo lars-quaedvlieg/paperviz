@@ -1,4 +1,4 @@
-from paperviz.layouts._registry import layout_registry
+from swizz.layouts._registry import layout_registry
 
 
 def layout(name, *args, **kwargs):

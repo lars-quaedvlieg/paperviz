@@ -1,7 +1,7 @@
 import os
 
-from paperviz.plots._registry import plot_registry
-from paperviz.tables._registry import table_registry
+from swizz.plots._registry import plot_registry
+from swizz.tables._registry import table_registry
 
 TOC_PATH = "docs/_toc.yml"
 

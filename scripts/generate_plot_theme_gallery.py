@@ -1,6 +1,6 @@
 import os
 
-from paperviz.plots.base import theme_registry
+from swizz.plots.base import theme_registry
 
 GALLERY_PATH = "docs/plot_themes/index.md"
 DETAILS_DIR = "collection/"  # where individual md files live
@@ -20,7 +20,7 @@ CARD_TEMPLATE = """\
 TEMPLATE = """\
 # 🎨 Themes Overview
 
-Paperviz comes with built-in visual themes for plots, inspired by common publication styles, or dark-mode aesthetics.
+Swizz comes with built-in visual themes for plots, inspired by common publication styles, or dark-mode aesthetics.
 
 Each theme controls global plot styling:
 - Font and font size
@@ -36,7 +36,7 @@ Each theme controls global plot styling:
 Use `set_style` to apply a theme globally to all plots:
 
 ```python
-from paperviz.plot.base import set_style
+from swizz.plot.base import set_style
 
 # Apply a theme
 set_style("latex")  # This is actually the default theme

@@ -15,7 +15,7 @@ class LogTracker:
     Parameters
     ----------
     name
-        Unique name for this tracker (also the subfolder under paperviz_runs/).
+        Unique name for this tracker (also the subfolder under swizz_runs/).
     counter_key
         The key in your logs dict whose value is used as filename for local files.
     final_idx
@@ -52,7 +52,7 @@ class LogTracker:
         self.is_last = False
 
         # prepare a folder just for this tracker
-        self.log_dir = Path("paperviz_runs") / self.name
+        self.log_dir = Path("swizz_runs") / self.name
         self.log_dir.mkdir(parents=True, exist_ok=True)
 
     def register(self, idx: int, logs: Dict[str, Any]) -> bool:
@@ -121,12 +121,12 @@ def log(
     out
         Any of ["wandb","local"].
     run_name
-        If given, groups this under paperviz_runs/<run_name>/; else
+        If given, groups this under swizz_runs/<run_name>/; else
         uses timestamp as run_name.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_name = run_name or timestamp
-    base_dir = Path("paperviz_runs") / run_name
+    base_dir = Path("swizz_runs") / run_name
     base_dir.mkdir(parents=True, exist_ok=True)
 
     # --- W&B ---

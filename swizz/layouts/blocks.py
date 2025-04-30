@@ -1,4 +1,4 @@
-from paperviz.plots._registry import plot_registry
+from swizz.plots._registry import plot_registry
 
 
 # class PlotBlock:

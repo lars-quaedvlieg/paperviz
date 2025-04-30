@@ -1,4 +1,4 @@
-from paperviz.tables._registry import register_table
+from swizz.tables._registry import register_table
 import pandas as pd
 
 

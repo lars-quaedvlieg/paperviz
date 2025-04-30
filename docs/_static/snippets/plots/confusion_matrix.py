@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from paperviz import plot
+from swizz import plot
 
 # 1) Define a toy confusion matrix
 #    Rows = true classes, Columns = predicted classes
