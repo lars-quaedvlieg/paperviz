@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/badge/version-0.1.0-orange)](https://github.com/lars-quaedvlieg/swizz/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/966071939.svg)](https://doi.org/10.5281/zenodo.15308660)
 [![Docs](https://img.shields.io/badge/docs-available-blue)](https://lars-quaedvlieg.github.io/swizz/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Built for Papers](https://img.shields.io/badge/built%20for-AI%20papers-ff69b4)](https://github.com/lars-quaedvlieg/swizz)
