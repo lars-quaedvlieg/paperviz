@@ -1,28 +1,21 @@
-import numpy as np
-from matplotlib import pyplot as plt
+import pandas as pd
 from swizz import plot
+import matplotlib.pyplot as plt
 
-data_dict = {
-    "Forward": {
-        "Accuracy": 4.2, "Precision": 3.5, "Recall": 2.1,
-    },
-    "Reverse": {
-        "Accuracy": 6.0, "Precision": 5.2, "Recall": 4.8,
-    },
-    "Baseline": {
-        "Accuracy": 5.3, "Precision": 4.8, "Recall": 3.6,
-    }
-}
+df = pd.DataFrame({
+    "Condition": ["No FTz", "FTz"],
+    "Reward": [1.0, 1.2],
+    "Goal": [0.7, 0.9],
+})
 
-# Color map where 'Reward' is assigned blue and 'Goal' is assigned pink
-
-
-# Style map for each metric (hatch patterns for filling)
-style_map = {
-    "Accuracy": '',
-    "Precision": '\\',
-    "Recall": 'x'  # Cross hatch pattern for Recall
-}
-
-plot("general_bar_plot",data_dict,style_map=style_map,save="bar")
+fig, ax = plot("general_bar_plot",
+    df=df,
+    category_column="Condition",
+    ylabel="Avg Value",
+    title="Comparison of Reward and Goal",
+    color_map={"Reward": "tab:blue", "Goal": "tab:orange"},
+    style_map={"Reward": "/", "Goal": "\\"},
+    bar_width=0.3,
+    save="general_bar_plot"
+)
 plt.show()

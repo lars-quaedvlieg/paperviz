@@ -1,6 +1,6 @@
 # `general_horizontal_bar_plot`
 
-> General horizontal bar plot comparing two (or more) metrics for each category with consistent colors and hatches.
+> Horizontal bar plot comparing metrics for each category, with optional group-based coloring and legends.
 
 ---
 
@@ -8,20 +8,21 @@
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| data_dict | Dict[str, Dict[str, float]] | ✅ | Mapping of category names to a dict of metric→value. Categories are arbitrary strings. |
+| df | pd.DataFrame | ✅ | DataFrame with category_column and metric columns. |
+| category_column | str | ✅ | Column used for y-axis labels. |
+| category_group_map | Dict[str, str] | ❌ | Mapping of category name → group label (used for colour and legend). |
+| group_color_map | Dict[str, str] | ❌ | Mapping of group label → colour. |
 | figsize | tuple | ❌ | Figure size. Default: (12, 7). |
-| xlabel | str | ❌ | Label for the x-axis. |
-| ylabel | str | ❌ | Label for the y-axis. |
-| title | str | ❌ | Title for the plot. |
+| xlabel | str | ❌ | Label for x-axis. |
+| ylabel | str | ❌ | Label for y-axis. |
+| title | str | ❌ | Title of the plot. |
 | legend_loc | str | ❌ | Legend location. Default: 'upper right'. |
-| bar_height | float | ❌ | Height of the bars. Default: 0.25. |
-| color_map | Dict[str, str] | ❌ | Mapping of metrics to colors (used if no group-based coloring). |
-| category_group_map | Dict[str, str] | ❌ | Mapping of each category name to a group key. Colors can then be assigned per group via `group_color_map`. |
-| group_color_map | Dict[str, str] | ❌ | Mapping of group keys to colors. If provided, overrides `color_map`. |
+| bar_height | float | ❌ | Height of the bars. Default: 0.35. |
+| color_map | Dict[str, str] | ❌ | Mapping of metrics to colours. |
 | style_map | Dict[str, str] | ❌ | Mapping of metrics to hatch styles. |
-| put_legend | bool | ❌ | Whether to show a legend. Default: True. |
-| save | str | ❌ | Base filename to save PNG and PDF outputs (without extension). |
-| ax | matplotlib.axes.Axes | ❌ | Matplotlib Axes to plot on. If None, a new figure is created. |
+| put_legend | bool | ❌ | Whether to display a legend. Default: True. |
+| save | str | ❌ | Filename base to save PNG and PDF. |
+| ax | matplotlib.axes.Axes | ❌ | Optional matplotlib Axes object. |
 
 ---
 
@@ -29,22 +30,17 @@
 
 ````{dropdown} Click to show example code
 ```python
-import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from swizz import plot
 
-# 1) Your data
-data = {
-    "64":  {"rate": 0.7835051},
-    "128": {"rate": 0.8800000},
-    "256": {"rate": 0.9368421},
-    "512":  {"rate": 0.8913044},
-    "1024": {"rate": 0.8800000},
-    "2048": {"rate": 0.8736842},
-    "0.95":  {"rate": 0.8297873},
-    "0.99":  {"rate": 0.8800000},
-    "0.995": {"rate": 0.7234042},
-}
+# 1) Prepare the data as a DataFrame
+df = pd.DataFrame({
+    "Category": ["64", "128", "256", "512", "1024", "2048", "0.95", "0.99", "0.995"],
+    "rate": [0.7835051, 0.8800000, 0.9368421,
+             0.8913044, 0.8800000, 0.8736842,
+             0.8297873, 0.8800000, 0.7234042]
+})
 
 # 2) Map each category string into a group key
 category_group_map = {
@@ -61,30 +57,30 @@ category_group_map = {
 
 # 3) Assign one color per group
 group_color_map = {
-    "Discount factor":"#41047F",
-    "Batch size":     "#7464AE",
-    "Hidden size":    "#A3A1CB",
+    "Discount factor": "#41047F",
+    "Batch size":      "#7464AE",
+    "Hidden size":     "#A3A1CB",
 }
 
-# 4) Plot
+# 4) Plot using the new function
 fig, ax = plot(
     "general_horizontal_bar_plot",
-    data,
-    figsize=(10, 6),
+    df=df,
+    category_column="Category",
+    category_group_map=category_group_map,
+    group_color_map=group_color_map,
     xlabel="Lone-wolf capture rate",
     ylabel="",
     title="",
     bar_height=0.4,
-    color_map=None,
-    category_group_map=category_group_map,
-    group_color_map=group_color_map,
-    style_map={"rate": ""},    
-    put_legend=True,         
+    style_map={"rate": ""},
+    put_legend=True,
     save="general_barh_plot",
     legend_loc="upper left",
 )
 
 plt.show()
+
 ```
 ````
 

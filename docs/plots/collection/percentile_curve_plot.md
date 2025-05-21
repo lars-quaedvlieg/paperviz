@@ -8,7 +8,8 @@
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| scores | np.ndarray | ✅ | Array of raw scores to plot. |
+| scores | Union[pd.Series, pd.DataFrame] | ✅ | Scores as a pandas Series or DataFrame. If DataFrame, use single-column or specify column. |
+| column | str | ❌ | Column name to use if `scores` is a DataFrame. Required if DataFrame has multiple columns. |
 | normalize_scores | bool | ❌ | Whether to normalize scores between 0 and 1. Default: True. |
 | normalize_percentiles | bool | ❌ | Whether to normalize x-axis (percentile) between 0 and 1. Default: True. |
 | horizontal_markers | List[Tuple[float, str]] | ❌ | List of (y_value, label) for horizontal reference lines. |
@@ -33,13 +34,14 @@
 
 ````{dropdown} Click to show example code
 ```python
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from swizz import plot
 
-# Generate fake scores
+# Generate fake scores as a pandas Series
 np.random.seed(42)
-scores = np.random.normal(200, 400, size=500)
+scores = pd.Series(np.random.normal(200, 400, size=500), name="score")
 
 fig, ax = plot("percentile_curve_plot",
     scores=scores,
@@ -65,6 +67,7 @@ fig, ax = plot("percentile_curve_plot",
     figsize=(8, 5),
 )
 plt.show()
+
 ```
 ````
 

@@ -25,12 +25,12 @@ Browse available plotting functions and their outputs. Click a preview to see fu
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
-    <a href="collection/multiple_std_lines.html">
-      <img src="../_static/images/plots/multiple_std_lines.png" alt="multiple_std_lines" style="max-height: 100%; max-width: 100%;">
+    <a href="collection/multiple_std_lines_df.html">
+      <img src="../_static/images/plots/" alt="multiple_std_lines_df" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
-  <h4 style="margin: 0.5rem 0;"><a href="collection/multiple_std_lines.html">multiple_std_lines</a></h4>
-  <p style="font-size: 0.9rem;">Line plot with shaded confidence intervals and configurable label, color, and linestyle mappings.</p>
+  <h4 style="margin: 0.5rem 0;"><a href="collection/multiple_std_lines_df.html">multiple_std_lines_df</a></h4>
+  <p style="font-size: 0.9rem;">Line plot with shaded confidence intervals and configurable label, color, and linestyle mappings, using a pandas DataFrame in long format.</p>
 </div>
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
@@ -40,17 +40,17 @@ Browse available plotting functions and their outputs. Click a preview to see fu
     </a>
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/general_bar_plot.html">general_bar_plot</a></h4>
-  <p style="font-size: 0.9rem;">General bar plot comparing two metrics (e.g., Reward and Goal) for each category with consistent colors.</p>
+  <p style="font-size: 0.9rem;">General bar plot comparing multiple metrics for each category with consistent colors and hatching.</p>
 </div>
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
   <div style="height: 180px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0.5rem;">
-    <a href="collection/dual_histogram_with_errorbars.html">
-      <img src="../_static/images/plots/dual_histogram_with_errorbars.png" alt="dual_histogram_with_errorbars" style="max-height: 100%; max-width: 100%;">
+    <a href="collection/dual_histogram_with_errorbars_df.html">
+      <img src="../_static/images/plots/dual_histogram_with_errorbars.png" alt="dual_histogram_with_errorbars_df" style="max-height: 100%; max-width: 100%;">
     </a>
   </div>
-  <h4 style="margin: 0.5rem 0;"><a href="collection/dual_histogram_with_errorbars.html">dual_histogram_with_errorbars</a></h4>
-  <p style="font-size: 0.9rem;">Plot a main model histogram and multiple baseline histograms with mean frequencies and standard error bars.</p>
+  <h4 style="margin: 0.5rem 0;"><a href="collection/dual_histogram_with_errorbars_df.html">dual_histogram_with_errorbars_df</a></h4>
+  <p style="font-size: 0.9rem;">Plot main model and baseline histograms with mean frequencies and standard error bars, using a pandas DataFrame in long format.</p>
 </div>
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">
@@ -70,7 +70,7 @@ Browse available plotting functions and their outputs. Click a preview to see fu
     </a>
   </div>
   <h4 style="margin: 0.5rem 0;"><a href="collection/general_horizontal_bar_plot.html">general_horizontal_bar_plot</a></h4>
-  <p style="font-size: 0.9rem;">General horizontal bar plot comparing two (or more) metrics for each category with consistent colors and hatches.</p>
+  <p style="font-size: 0.9rem;">Horizontal bar plot comparing metrics for each category, with optional group-based coloring and legends.</p>
 </div>
 
 <div style="flex: 1 1 300px; max-width: 300px; border: 1px solid #ddd; padding: 1rem; border-radius: 0.5rem;">

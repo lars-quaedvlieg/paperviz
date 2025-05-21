@@ -1,9 +1,9 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from swizz import plot
+import pandas as pd 
 
 rounds = np.linspace(250, 2900, 30)
-
 
 def fake_curve(seed, offset=0):
     np.random.seed(seed)
@@ -12,50 +12,45 @@ def fake_curve(seed, offset=0):
     stderr = np.random.uniform(5, 20, size=len(rounds))
     return base + noise, stderr
 
+# Build a long-form DataFrame
+records = []
+for name, (seed, offset) in [("forward-method", (0, 0)), ("reverse-method", (1, -40)), ("baseline", (2, -60))]:
+    y_vals, stderr_vals = fake_curve(seed, offset)
+    for x_val, y_val, err in zip(rounds, y_vals, stderr_vals):
+        records.append({
+            "method": name,
+            "round_num": x_val,
+            "unique_scores": y_val,
+            "std_error": err,
+        })
+df = pd.DataFrame.from_records(records)
 
-averaged_metrics = {
-    "forward-method": {
-        "round_num": rounds,
-        "unique_scores": fake_curve(0)[0],
-        "std_error": fake_curve(0)[1],
-    },
-    "reverse-method": {
-        "round_num": rounds,
-        "unique_scores": fake_curve(1, -40)[0],
-        "std_error": fake_curve(1)[1],
-    },
-    "baseline": {
-        "round_num": rounds,
-        "unique_scores": fake_curve(2, -60)[0],
-        "std_error": fake_curve(2)[1],
-    },
-}
-
+# Correct call: include plot name as first argument
 fig, ax = plot(
-    "multiple_std_lines",
-    data_dict=averaged_metrics,
+    "multiple_std_lines_df",
+    df,
+    label_key="method",
     label_map={
         "forward-method": "Forward KL",
         "reverse-method": "Reverse KL",
         "baseline": "No Training",
-    },
-    style_map={
-        "forward-method": "solid",
-        "reverse-method": "dashed",
-        "baseline": "dotted",
     },
     color_map={
         "forward-method": "#CC79A7",
         "reverse-method": "#0072B2",
         "baseline": "#009E73",
     },
+    style_map={
+        "forward-method": "solid",
+        "reverse-method": "dashed",
+        "baseline": "dotted",
+    },
     xlabel="Round Number",
     ylabel="Number of Unique Scores",
     xlim=(250, 2900),
     ylim=(-650, -355),
-    x_formatter=lambda x, _: f"{x * 10:.0f}",  # Multiples the axis numbers by 10 and formats in integers
-    y_formatter=lambda y, _: f"{y / 100:.1f}",  # Divides the axis number by 100 and formats up to 1 decimal
-    save="ablation"  # Saves to ablation.png and ablation.pdf
+    x_formatter=lambda x, _: f"{x * 10:.0f}",
+    y_formatter=lambda y, _: f"{y / 100:.1f}",
+    save="ablation_df"
 )
-
 plt.show()

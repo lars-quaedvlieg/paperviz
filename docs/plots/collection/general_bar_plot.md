@@ -1,6 +1,6 @@
 # `general_bar_plot`
 
-> General bar plot comparing two metrics (e.g., Reward and Goal) for each category with consistent colors.
+> General bar plot comparing multiple metrics for each category with consistent colors and hatching.
 
 ---
 
@@ -8,15 +8,16 @@
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| data_dict | Dict[str, Dict[str, np.ndarray]] | ✅ | Each key is a category (e.g., 'No F Tz', 'F Tz') and maps to a dict with arrays for metrics. |
-| figsize | tuple | ❌ | Size of the figure. Default: (10, 6). |
-| xlabel | str | ❌ | Label for the x-axis. |
-| ylabel | str | ❌ | Label for the y-axis. |
-| title | str | ❌ | Title for the plot. |
-| legend_loc | str | ❌ | Location for the legend. Default: 'upper left'. |
-| bar_width | float | ❌ | Width of the bars. Default: 0.25. |
-| color_map | Dict[str, str] | ❌ | Mapping of metrics to colors. |
-| style_map | Dict[str, str] | ❌ | Mapping of metrics to hatch styles. |
+| df | pd.DataFrame | ✅ | DataFrame containing the category column and one or more metric columns. |
+| category_column | str | ✅ | Column name for the x-axis categories (e.g., 'Group', 'Condition'). |
+| figsize | tuple | ❌ | Figure size. Default: (12, 7). |
+| xlabel | str | ❌ | Label for x-axis. |
+| ylabel | str | ❌ | Label for y-axis. |
+| title | str | ❌ | Title of the plot. |
+| legend_loc | str | ❌ | Legend location. Default: 'upper right'. |
+| bar_width | float | ❌ | Width of bars. Default: 0.25. |
+| color_map | Dict[str, str] | ❌ | Map from metric name to color. |
+| style_map | Dict[str, str] | ❌ | Map from metric name to hatch style. |
 | save | str | ❌ | Base filename to save PNG and PDF. |
 
 ---
@@ -25,33 +26,26 @@
 
 ````{dropdown} Click to show example code
 ```python
-import numpy as np
-from matplotlib import pyplot as plt
+import pandas as pd
 from swizz import plot
+import matplotlib.pyplot as plt
 
-data_dict = {
-    "Forward": {
-        "Accuracy": 4.2, "Precision": 3.5, "Recall": 2.1,
-    },
-    "Reverse": {
-        "Accuracy": 6.0, "Precision": 5.2, "Recall": 4.8,
-    },
-    "Baseline": {
-        "Accuracy": 5.3, "Precision": 4.8, "Recall": 3.6,
-    }
-}
+df = pd.DataFrame({
+    "Condition": ["No FTz", "FTz"],
+    "Reward": [1.0, 1.2],
+    "Goal": [0.7, 0.9],
+})
 
-# Color map where 'Reward' is assigned blue and 'Goal' is assigned pink
-
-
-# Style map for each metric (hatch patterns for filling)
-style_map = {
-    "Accuracy": '',
-    "Precision": '\\',
-    "Recall": 'x'  # Cross hatch pattern for Recall
-}
-
-plot("general_bar_plot",data_dict,style_map=style_map,save="bar")
+fig, ax = plot("general_bar_plot",
+    df=df,
+    category_column="Condition",
+    ylabel="Avg Value",
+    title="Comparison of Reward and Goal",
+    color_map={"Reward": "tab:blue", "Goal": "tab:orange"},
+    style_map={"Reward": "/", "Goal": "\\"},
+    bar_width=0.3,
+    save="general_bar_plot"
+)
 plt.show()
 
 ```

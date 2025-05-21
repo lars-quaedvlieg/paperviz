@@ -1,10 +1,11 @@
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from swizz import plot
 
-# Generate fake scores
+# Generate fake scores as a pandas Series
 np.random.seed(42)
-scores = np.random.normal(200, 400, size=500)
+scores = pd.Series(np.random.normal(200, 400, size=500), name="score")
 
 fig, ax = plot("percentile_curve_plot",
     scores=scores,

@@ -1,16 +1,17 @@
 from swizz.plots._registry import register_plot
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from matplotlib import colors as mcolors
 
 @register_plot(
     name="confusion_matrix",
     description="Plot a confusion matrix heatmap with optional normalization and annotations.",
     args=[
-        {"name": "cm", "type": "np.ndarray", "required": True,
-         "description": "Confusion matrix as a 2D numpy array (shape N×N)."},
-        {"name": "labels", "type": "List[str]", "required": True,
-         "description": "List of class labels, length N, corresponding to matrix indices."},
+        {"name": "cm", "type": "pd.DataFrame", "required": True,
+         "description": "Confusion matrix as a pandas DataFrame (shape N×N)."},
+        {"name": "labels", "type": "List[str]", "required": False,
+         "description": "List of class labels, length N, corresponding to matrix indices. If None, use DataFrame index/columns."},
         {"name": "figsize", "type": "tuple", "required": False,
          "description": "Figure size, e.g., (8, 6)."},
         {"name": "cmap", "type": "str", "required": False,
@@ -31,7 +32,7 @@ from matplotlib import colors as mcolors
 )
 def plot(
     cm,
-    labels,
+    labels=None,
     figsize=(8, 6),
     cmap='Blues',
     normalize=False,
@@ -47,27 +48,29 @@ def plot(
     else:
         fig = ax.figure
 
-    # Convert to numpy array
-    cm = np.array(cm)
+    # Automatically use labels from DataFrame if not provided
+    if labels is None:
+        labels = cm.index.tolist()
 
-    # Optionally normalize each row
+    # Get matrix values for operations
+    cm_values = cm.values
+
+    # Normalize rows if needed
     if normalize:
-        row_sums = cm.sum(axis=1, keepdims=True)
-        # Avoid division by zero
-        cm = np.divide(cm, row_sums, where=row_sums!=0)
+        row_sums = cm_values.sum(axis=1, keepdims=True)
+        cm_values = np.divide(cm_values, row_sums, where=row_sums != 0)
 
     # Plot the matrix
-    im = ax.imshow(cm, interpolation='nearest', cmap=cmap)
+    im = ax.imshow(cm_values, interpolation='nearest', cmap=cmap)
     if cbar:
         fig.colorbar(im, ax=ax)
 
     # Annotation threshold for text color
-    thresh = cm.max() / 2.
-    n_rows, n_cols = cm.shape
+    thresh = cm_values.max() / 2.
+    n_rows, n_cols = cm_values.shape
     for i in range(n_rows):
         for j in range(n_cols):
-            val = cm[i, j]
-            # Choose white or black text for contrast
+            val = cm_values[i, j]
             color = 'white' if val > thresh else 'black'
             ax.text(j, i, format(val, fmt),
                     ha='center', va='center',
