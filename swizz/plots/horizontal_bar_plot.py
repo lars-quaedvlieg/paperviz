@@ -2,7 +2,7 @@ from swizz.plots._registry import register_plot
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import colors as mcolors
-
+from matplotlib.patches import Patch
 @register_plot(
     name="general_horizontal_bar_plot",
     description=(
@@ -11,9 +11,11 @@ from matplotlib import colors as mcolors
     ),
     args=[
         {"name": "data_dict", "type": "Dict[str, Dict[str, float]]", "required": True,
-         "description": "Each key is a category and maps to a dict of metric→value."},
+         "description": (
+             "Mapping of category names to a dict of metric→value. Categories are arbitrary strings."
+         )},
         {"name": "figsize", "type": "tuple", "required": False,
-         "description": "Size of the figure. Default: (10, 6)."},
+         "description": "Figure size. Default: (12, 7)."},
         {"name": "xlabel", "type": "str", "required": False,
          "description": "Label for the x-axis."},
         {"name": "ylabel", "type": "str", "required": False,
@@ -21,15 +23,31 @@ from matplotlib import colors as mcolors
         {"name": "title", "type": "str", "required": False,
          "description": "Title for the plot."},
         {"name": "legend_loc", "type": "str", "required": False,
-         "description": "Location for the legend. Default: 'upper right'."},
+         "description": "Legend location. Default: 'upper right'."},
         {"name": "bar_height", "type": "float", "required": False,
          "description": "Height of the bars. Default: 0.25."},
         {"name": "color_map", "type": "Dict[str, str]", "required": False,
-         "description": "Mapping of metrics to colors."},
+         "description": (
+             "Mapping of metrics to colors (used if no group-based coloring)."
+         )},
+        {"name": "category_group_map", "type": "Dict[str, str]", "required": False,
+         "description": (
+             "Mapping of each category name to a group key. "
+             "Colors can then be assigned per group via `group_color_map`."
+         )},
+        {"name": "group_color_map", "type": "Dict[str, str]", "required": False,
+         "description": (
+             "Mapping of group keys to colors. "
+             "If provided, overrides `color_map`."
+         )},
         {"name": "style_map", "type": "Dict[str, str]", "required": False,
          "description": "Mapping of metrics to hatch styles."},
+        {"name": "put_legend", "type": "bool", "required": False,
+         "description": "Whether to show a legend. Default: True."},
         {"name": "save", "type": "str", "required": False,
-         "description": "Base filename to save PNG and PDF."},
+         "description": "Base filename to save PNG and PDF outputs (without extension)."},
+        {"name": "ax", "type": "matplotlib.axes.Axes", "required": False,
+         "description": "Matplotlib Axes to plot on. If None, a new figure is created."},
     ],
     example_image="general_barh_plot.png",
     example_code="general_barh_plot.py",
@@ -43,8 +61,11 @@ def plot(
     legend_loc="upper right",
     bar_height=0.35,
     color_map=None,
+    category_group_map=None,
+    group_color_map=None,
     style_map=None,
     save=None,
+    put_legend=True,
     ax=None,
 ):
     # Create axes if needed
@@ -75,13 +96,21 @@ def plot(
         offsets = (i - len(metrics)/2) * bar_height
         bar_pos = y_positions + offsets
         all_bar_positions.append(bar_pos)
-
+        # Determine colors per bar
+        if category_group_map and group_color_map:
+            bar_colors = []
+            for cat in categories:
+                grp = category_group_map.get(cat)
+                bar_colors.append(group_color_map.get(grp, color_map.get(metric)))
+        else:
+            bar_colors = [color_map.get(metric)] * len(categories)
         bars = ax.barh(
             bar_pos,
             values,
             height=bar_height,
             label=metric,
-            color=color,
+            color=bar_colors,
+            edgecolor=None,
             linewidth=1,
             hatch=hatch
         )
@@ -99,7 +128,7 @@ def plot(
             ax.text(
                 w + max(values) * 0.01,  # small offset past bar
                 y,
-                f"{w:.0f}",
+                f"{w:.3f}",
                 va="center",
                 ha="left",
                 color=edge_col,
@@ -122,13 +151,39 @@ def plot(
     ax.set_title(title)
 
     # Legend
-    ax.legend(loc=legend_loc, ncol=len(metrics))
+    if put_legend:
+        if category_group_map and group_color_map:
+            # show groups in legend
+            handles = [Patch(color=color, label=group)
+                       for group, color in group_color_map.items()]
+            ax.legend(handles=handles, loc=legend_loc)
+        else:
+            ax.legend(loc=legend_loc, ncol=len(metrics))
 
     plt.tight_layout()
 
+
     # Save if requested
     if save:
-        fig.savefig(f"{save}.png", dpi=300, bbox_inches="tight")
-        fig.savefig(f"{save}.pdf", dpi=300, bbox_inches="tight")
+        import os
+        # Resolve to absolute path and ensure directory exists
+        save_path = os.path.abspath(save)
+        save_dir = os.path.dirname(save_path)
+        if save_dir and not os.path.exists(save_dir):
+            os.makedirs(save_dir, exist_ok=True)
+        base, ext = os.path.splitext(save_path)
+        # Save both formats (png/pdf)
+        if ext.lower() in ['.png', '.pdf']:
+            # Save given format
+            fig.savefig(save_path, dpi=300, bbox_inches='tight')
+            # Also save the other format
+            other = '.pdf' if ext.lower() == '.png' else '.png'
+            fig.savefig(base + other, dpi=300, bbox_inches='tight')
+            print(f"Saved plot to {save_path} and {base + other}")
+        else:
+            fig.savefig(f"{save_path}.png", dpi=300, bbox_inches='tight')
+            fig.savefig(f"{save_path}.pdf", dpi=300, bbox_inches='tight')
+
+
 
     return fig, ax

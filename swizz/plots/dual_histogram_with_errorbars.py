@@ -94,7 +94,19 @@ def plot(
     plt.tight_layout()
 
     if save:
-        plt.savefig(f"{save}.png", dpi=300, bbox_inches="tight")
-        plt.savefig(f"{save}.pdf", dpi=300, bbox_inches="tight")
+        import os
+        # Determine file paths
+        # If save has an extension, use it directly; otherwise append .png and .pdf
+        save_dir = os.path.dirname(save)
+        if save_dir and not os.path.exists(save_dir):
+            os.makedirs(save_dir, exist_ok=True)
+        base, ext = os.path.splitext(save)
+        if ext.lower() in ['.png', '.pdf']:
+            # single file provided
+            fig.savefig(save, dpi=300, bbox_inches='tight')
+        else:
+            fig.savefig(f"{save}.png", dpi=300, bbox_inches='tight')
+            fig.savefig(f"{save}.pdf", dpi=300, bbox_inches='tight')
+
 
     return fig, ax
