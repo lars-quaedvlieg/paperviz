@@ -16,6 +16,7 @@ chapters:
       - file: plots/collection/function_percentile_plot
       - file: plots/collection/general_bar_plot
       - file: plots/collection/general_horizontal_bar_plot
+      - file: plots/collection/heatmap
       - file: plots/collection/multiple_std_lines
       - file: plots/collection/percentile_curve_plot
   - file: layout/index
