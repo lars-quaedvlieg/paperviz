@@ -1,4 +1,5 @@
 rm -rf docs/tables
+rm docs/plots/collection/*
 rm docs/_toc.yml
 PYTHONPATH=. python scripts/generate_table_docs.py
 PYTHONPATH=. python scripts/generate_plots_docs.py

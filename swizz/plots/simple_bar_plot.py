@@ -30,7 +30,7 @@ def plot(
     category_column,
     figsize=(12, 7),
     xlabel=None,
-    ylabel="Value",
+    ylabel=None,
     title=None,
     legend_loc="upper right",
     bar_width=0.25,
@@ -88,8 +88,10 @@ def plot(
                     [height, height + 0.1], color=metric_dark, lw=1.5)
 
     # Axis labels and ticks
-    ax.set_ylabel(ylabel)
-    ax.set_xlabel(xlabel if xlabel else category_column)
+    if ylabel:
+        ax.set_ylabel(ylabel)
+    if xlabel:
+        ax.set_xlabel(xlabel)
 
     bar_positions_list = np.array(bar_positions_list)
     center_indices = np.mean(bar_positions_list, axis=0)

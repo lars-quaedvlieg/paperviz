@@ -51,7 +51,8 @@ from swizz.utils.plot import apply_legend
         {"name": "save", "type": "str", "required": False,
          "description": "Base filename to save PNG and PDF."},
     ],
-    example_code="multiple_std_lines_df_example.py",
+    example_image="multiple_std_lines_df.png",
+    example_code="multiple_std_lines_df.py",
 )
 def plot(
     data_df: pd.DataFrame,
