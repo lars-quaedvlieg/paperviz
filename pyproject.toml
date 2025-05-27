@@ -1,13 +1,12 @@
 [project]
 name = "swizz"
-version = "0.1.2.dev"
+version = "0.1.2"
 description = "Publication-ready plotting library for ML papers"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Lars Quaedvlieg", email = "larsquaedvlieg@outlook.com" },
-    { name = "Andrea Miele" }
+    { name="Lars Quaedvlieg", email="larsquaedvlieg@outlook.com" }
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
