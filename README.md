@@ -35,6 +35,8 @@ If you use Swizz in your research, please consider citing it using:
 - 📊 One-liner **plotting functions**
 - 🧩 Easy **layout builders** for stacked, grid, and subfigure formats
 - 📚 Expanding **Jupyter Book** documentation with live examples
+- 🎬 **Manim animations** for dynamic visualizations and function evolutions
+- 📈 **Weights & Biases** integration for experiment tracking and analysis
 
 ---
 
@@ -58,9 +60,11 @@ pip install .
 
 | Module            | Description                                                    |
 |-------------------|----------------------------------------------------------------|
-| `swizz.table`  | Table generators                                               |
-| `swizz.plot`   | Plotting utilities built on Seaborn & Matplotlib               |
-| `swizz.layout` | Layout builders for stacked / side-by-side images              |
+| `swizz.table`     | Table generators                                               |
+| `swizz.plot`      | Plotting utilities built on Seaborn & Matplotlib               |
+| `swizz.layout`    | Layout builders for stacked / side-by-side images              |
+| `swizz.manim`     | Dynamic visualizations and animations                          |
+| `swizz.logging`   | Experiment tracking with Weights & Biases                      |
 
 ---
 
@@ -108,6 +112,103 @@ plt.show()
 ```
 ![Bar Chart](https://drive.usercontent.google.com/download?id=1jaIVf8Wl2Zp7He3Dt610CvaV1FEobObL)
 
+**Weights & Biases integration example:**
+
+```python
+from swizz.logging.wandb_analyzer import WandbAnalyzer, RunGroup
+
+# Initialize the analyzer
+analyzer = WandbAnalyzer("your-username/your-project", verbose=True)
+
+# Define run groups (either by prefix or run IDs)
+run_groups = [
+    RunGroup(name="experiment1", prefix="your-prefix-1"),
+    RunGroup(name="experiment2", prefix="your-prefix-2"),
+]
+
+# Get analyzed metrics
+results_df = analyzer.compute_grouped_metrics(
+    run_groups,
+    x_key="round_num",
+    y_key="your_metric"
+)
+
+# Plot the results
+fig_scores, ax = plot(
+    "multiple_std_lines_df",
+    figsize=(8,5),
+    data_df=results_df,
+    label_key="group_name",
+    x_key="round_num",
+    y_key="your_metric_mean",
+    yerr_key="your_metric_std",
+    xlabel="Sampling Budget",
+    ylabel="Average Score",
+    legend_title="Experiments",
+    legend_ncol=2,
+    legend_loc="lower right"
+)
+plt.show()
+```
+
+**Manim animation example:**
+
+```python
+from swizz import render_manim
+import numpy as np
+import pandas as pd
+
+# Create sample data
+methods = ['Method A', 'Method B', 'Method C']
+iterations = range(30)
+scores = []
+
+for method in methods:
+    for iteration in iterations:
+        # Generate evolving scores for each method
+        if method == 'Method A':
+            mean = 50 + iteration * 1
+            std = 10 + iteration * 3
+        elif method == 'Method B':
+            mean = 40 + iteration * 2
+            std = 15 + iteration * 0.5
+        else:  # Method C
+            mean = 45 + iteration * 3
+            std = 12
+            
+        scores.extend([(method, iteration, score) 
+                      for score in np.random.normal(mean, std, 300)])
+
+scores_df = pd.DataFrame(scores, columns=['method', 'iteration', 'score'])
+
+# Render the animation
+render_manim(
+    "histograms_evolution",
+    render_config={
+        "quality": "high_quality",
+        "format": "mp4",
+        "save_pngs": True,
+    },
+    scores_df=scores_df,
+    method_column="method",
+    iteration_column="iteration",
+    score_column="score",
+    x_min=0,
+    x_max=100,
+    x_step=10,
+    num_bins=60,
+    x_length=10,
+    y_length=5,
+    time_between_iterations=0.5,
+    color_dict={
+        "Method A": "#1f77b4",
+        "Method B": "#ff7f0e",
+        "Method C": "#2ca02c",
+    },
+)
+```
+![Histograms Evolution](https://drive.usercontent.google.com/download?id=1REgYgK7cs48Tx29XXb6jhJEkles4Kf9x)
+
 **Complex nested layouts:**
 
 ```python
@@ -146,9 +247,9 @@ plt.show()
 ## 🛠️ Roadmap
 
 - [ ] Add more plot types (confusion, UMAP, attention, histograms, etc.)
-- [ ] Add Manim integrations for dynamic plot videos and function evolutions, etc.
+- [x] Add Manim integrations for dynamic plot videos and function evolutions
 - [ ] Add more tables
-- [ ] W&B / MLflow integration
+- [x] W&B / MLflow integration
 
 ---
 
