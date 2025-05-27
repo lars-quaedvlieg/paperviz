@@ -13,8 +13,8 @@ from matplotlib.patches import Patch
          "description": "DataFrame with category_column and metric columns."},
         {"name": "category_column", "type": "str", "required": True,
          "description": "Column used for y-axis labels."},
-        {"name": "category_group_map", "type": "Dict[str, str]", "required": False,
-         "description": "Mapping of category name → group label (used for colour and legend)."},
+        {"name": "category_group_key", "type": "str", "required": False,
+         "description": "Column used for group labels (used for colour and legend)."},
         {"name": "group_color_map", "type": "Dict[str, str]", "required": False,
          "description": "Mapping of group label → colour."},
         {"name": "figsize", "type": "tuple", "required": False, "description": "Figure size. Default: (12, 7)."},
@@ -35,7 +35,7 @@ from matplotlib.patches import Patch
 def plot(
     df,
     category_column,
-    category_group_map=None,
+    category_group_key=None,
     group_color_map=None,
     figsize=(12, 7),
     xlabel=None,
@@ -56,8 +56,12 @@ def plot(
         raise ValueError(f"`{category_column}` not in DataFrame.")
 
     categories = df[category_column].tolist()
+    if category_group_key:
+        groups = df[category_group_key].tolist()
+    else:
+        groups = None
     y_positions = np.arange(len(categories))
-    metric_columns = [col for col in df.columns if col != category_column]
+    metric_columns = [col for col in df.columns if col != category_column and (category_group_key is None or col != category_group_key)]
 
     if not color_map:
         color_map = {m: None for m in metric_columns}
@@ -76,8 +80,8 @@ def plot(
         hatch = style_map.get(metric, '/')
 
         # Determine colour for each bar
-        if category_group_map and group_color_map:
-            bar_colors = [group_color_map.get(category_group_map.get(cat), None) for cat in categories]
+        if groups and group_color_map:
+            bar_colors = [group_color_map.get(group, None) for group in groups]
         else:
             bar_colors = [color_map.get(metric)] * len(categories)
 
@@ -120,7 +124,7 @@ def plot(
 
     # Custom legend
     if put_legend:
-        if category_group_map and group_color_map:
+        if groups and group_color_map:
             handles = [Patch(facecolor=col, label=group) for group, col in group_color_map.items()]
             ax.legend(handles=handles, loc=legend_loc)
         else:
