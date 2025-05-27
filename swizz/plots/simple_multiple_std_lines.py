@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+import matplotlib.cm as cm
 
 from swizz.plots._registry import register_plot
-from swizz.utils.plot import apply_legend
 
 @register_plot(
     name="multiple_std_lines_df",
@@ -30,6 +30,10 @@ from swizz.utils.plot import apply_legend
          "description": "Figure size. Default: (8, 5)."},
         {"name": "legend_loc", "type": "str", "required": False,
          "description": "Legend location. Default: 'upper left'."},
+        {"name": "legend_title", "type": "str", "required": False,
+         "description": "Legend title. Default: None."},
+        {"name": "legend_ncol", "type": "int", "required": False,
+         "description": "Number of columns in legend. Default: 1."},
         {"name": "label_map", "type": "Dict[str, str]", "required": False,
          "description": "Mapping of raw labels to display names."},
         {"name": "color_map", "type": "Dict[str, str]", "required": False,
@@ -62,6 +66,8 @@ def plot(
     yerr_key: str = "std_error",
     figsize: tuple = (8, 5),
     legend_loc: str = "upper left",
+    legend_title: str = None,
+    legend_ncol: int = 1,
     label_map: dict = None,
     color_map: dict = None,
     style_map: dict = None,
@@ -80,8 +86,21 @@ def plot(
     else:
         fig = ax.figure
 
+    try:
+        data_df[label_key] = data_df[label_key].astype(int)
+    except:
+        try:
+            data_df[label_key] = data_df[label_key].astype(float)
+        except:
+            pass
+
+    if color_map is None:
+        positions = np.linspace(0, 1, len(data_df[label_key].unique()))
+        cmap = cm.get_cmap("viridis")
+        color_map = {key: cmap(pos) for key, pos in zip(data_df[label_key].unique(), positions)}
+
     # Group and plot each series
-    for label, group in data_df.groupby(label_key):
+    for label, group in sorted(data_df.groupby(label_key), key=lambda x: x[0]):
         display_name = label_map.get(label, label) if label_map else label
         color = color_map.get(label) if color_map else None
         linestyle = style_map.get(label, "solid") if style_map else "solid"
@@ -96,7 +115,7 @@ def plot(
 
     # Legend and formatting
     if legend_loc:
-        ax.legend(loc=legend_loc)
+        ax.legend(loc=legend_loc, title=legend_title, ncol=legend_ncol)
     if x_formatter:
         ax.xaxis.set_major_formatter(mtick.FuncFormatter(x_formatter))
     if y_formatter:

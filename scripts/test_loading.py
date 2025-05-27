@@ -1,6 +1,6 @@
 # scripts/test_loading.py
 
-from swizz.logging.logging import load_runs
+from swizz.logging.logger import load_runs
 import pandas as pd
 
 def main():

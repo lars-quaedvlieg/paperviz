@@ -15,6 +15,8 @@
 | yerr_key | str | ❌ | Column name for standard error. Default: 'std_error'. |
 | figsize | tuple | ❌ | Figure size. Default: (8, 5). |
 | legend_loc | str | ❌ | Legend location. Default: 'upper left'. |
+| legend_title | str | ❌ | Legend title. Default: None. |
+| legend_ncol | int | ❌ | Number of columns in legend. Default: 1. |
 | label_map | Dict[str, str] | ❌ | Mapping of raw labels to display names. |
 | color_map | Dict[str, str] | ❌ | Mapping of raw labels to line colors. |
 | style_map | Dict[str, str] | ❌ | Mapping of raw labels to line styles. |

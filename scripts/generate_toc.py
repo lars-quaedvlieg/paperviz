@@ -39,6 +39,10 @@ def generate_toc():
         "  - file: plot_themes/index",
     ])
 
+    toc_lines.extend([
+        "  - file: logging/index",
+    ])
+
     # Write to file
     with open(TOC_PATH, "w") as f:
         f.write("\n".join(toc_lines))

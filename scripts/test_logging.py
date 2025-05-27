@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 import wandb
 
-from swizz.logging.logging import LogTracker, log
+from swizz.logging.logger import LogTracker, log
 
 def main():
     # 1) Initialize W&B
