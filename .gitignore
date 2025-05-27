@@ -9,6 +9,10 @@ __pycache__/
 # VSCode
 .vscode
 
+# Outputs
+out
+media
+
 # C extensions
 *.so
 

@@ -261,3 +261,5 @@ if __name__ == "__main__":
     )
 
     plt.show()
+
+    # TODO: Return stiching as df instead of dict and group by custom stuff

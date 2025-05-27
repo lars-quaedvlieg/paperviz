@@ -2,9 +2,9 @@ import os
 
 from swizz.plots._registry import plot_registry
 from swizz.tables._registry import table_registry
+from swizz.manims._registry import manim_registry
 
 TOC_PATH = "docs/_toc.yml"
-
 
 def generate_toc():
     toc_lines = [
@@ -37,7 +37,13 @@ def generate_toc():
 
     toc_lines.extend([
         "  - file: plot_themes/index",
+        "  - file: manim/index",
+        "    sections:",
     ])
+
+    # Generate section entries for each table
+    for name in sorted(manim_registry.keys()):
+        toc_lines.append(f"      - file: manim/collection/{name}")
 
     toc_lines.extend([
         "  - file: logging/index",

@@ -23,4 +23,8 @@ chapters:
     sections:
       - file: layout/built-in-layouts
   - file: plot_themes/index
+  - file: manim/index
+    sections:
+      - file: manim/collection/code_evolution
+      - file: manim/collection/histograms_evolution
   - file: logging/index
