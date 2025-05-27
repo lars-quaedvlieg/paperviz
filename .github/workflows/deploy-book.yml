@@ -24,15 +24,15 @@ jobs:
           python-version: '3.10'
           cache: pip
 
-      - name: Install swizz and dependencies
-        run: pip install .[docs]
-
-      - name: Install Times New Roman and clear matplotlib cache
+      - name: Install required packages and clear matplotlib cache
         run: |
           sudo apt-get update
           echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-          sudo apt-get install -y ttf-mscorefonts-installer fontconfig
+          sudo apt-get install -y ttf-mscorefonts-installer fontconfig libsdl-pango-dev 
           rm -rf ~/.cache/matplotlib
+
+      - name: Install swizz and dependencies
+        run: pip install .[docs]
 
       - name: Cache executed notebooks (optional)
         uses: actions/cache@v4
