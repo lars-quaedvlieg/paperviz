@@ -74,7 +74,8 @@ class WandbAnalyzer:
         return dict(grouped_runs)
     
     def _stitch_runs(self, grouped_runs: Dict[int, List[wandb.apis.public.Run]], 
-                    x_key: str, y_key: str, run_group_name: str) -> Dict[int, pd.DataFrame]:
+                    x_key: str, y_key: str, run_group_name: str,
+                    samples: int = 100) -> Dict[int, pd.DataFrame]:
         """Stitch together runs with the same seed, handling overlapping x values.
         
         This method combines multiple runs from the same seed into a single continuous
@@ -85,6 +86,8 @@ class WandbAnalyzer:
             x_key: The key for the x-axis data
             y_key: The key for the y-axis data
             run_group_name: Name of the run group for logging
+            samples: Number of samples to retrieve from wandb. Default is 100.
+                    Higher values give more granular data but take longer to process.
             
         Returns:
             Dictionary mapping seeds to stitched DataFrames
@@ -98,7 +101,7 @@ class WandbAnalyzer:
             all_data = []
             
             for run in runs:
-                history = run.history(keys=[x_key, y_key], pandas=True, samples=100, x_axis=x_key)
+                history = run.history(keys=[x_key, y_key], pandas=True, samples=samples, x_axis=x_key)
                 if not history.empty:
                     all_data.append(history)
                     if self.verbose:
@@ -133,7 +136,9 @@ class WandbAnalyzer:
             
         return stitched_data
     
-    def get_stitched_runs(self, run_groups: List[RunGroup] | RunGroup, x_key: str, y_key: str) -> Dict[str, Dict[int, pd.DataFrame]]:
+    def get_stitched_runs(self, run_groups: List[RunGroup] | RunGroup, 
+                         x_key: str, y_key: str,
+                         samples: int = 100) -> Dict[str, Dict[int, pd.DataFrame]]:
         """Get stitched runs for each run group, organized by seed.
         
         This is the core method that handles grouping runs by experiment and seed,
@@ -143,6 +148,8 @@ class WandbAnalyzer:
             run_groups: List of RunGroup objects or single RunGroup
             x_key: The key for the x-axis data
             y_key: The key for the y-axis data
+            samples: Number of samples to retrieve from wandb. Default is 100.
+                    Higher values give more granular data but take longer to process.
             
         Returns:
             Dictionary mapping run group names to dictionaries of stitched data by seed
@@ -159,7 +166,7 @@ class WandbAnalyzer:
             # Get and group runs
             runs = self._get_runs(run_group)
             grouped_runs = self._group_runs_by_seed(runs)
-            stitched_data = self._stitch_runs(grouped_runs, x_key, y_key, run_group.name)
+            stitched_data = self._stitch_runs(grouped_runs, x_key, y_key, run_group.name, samples=samples)
             results[run_group.name] = stitched_data
             
             if self.verbose:
@@ -167,21 +174,85 @@ class WandbAnalyzer:
             
         return results
     
-    def compute_grouped_metrics(self, run_groups: List[RunGroup] | RunGroup, x_key: str, y_key: str) -> pd.DataFrame:
+    def _transform_data(self, df: pd.DataFrame, x_key: str, y_key: str, 
+                       interpolate_missing: bool = False,
+                       smoothing_window: Optional[int] = None) -> pd.DataFrame:
+        """Transform the data by interpolating missing values and/or applying smoothing.
+        
+        Args:
+            df: Input DataFrame
+            x_key: The key for the x-axis data
+            y_key: The key for the y-axis data
+            interpolate_missing: Whether to interpolate missing values
+            smoothing_window: Window size for rolling mean smoothing. If None, no smoothing is applied.
+            
+        Returns:
+            Transformed DataFrame
+        """
+        if interpolate_missing:
+            # Interpolate NaNs linearly, forward & backward
+            df[f"{y_key}_mean"] = (
+                df.groupby("group_name")[f"{y_key}_mean"]
+                .transform(lambda x: x.interpolate(method="linear", limit_direction="both"))
+            )
+            
+            df[f"{y_key}_std"] = (
+                df.groupby("group_name")[f"{y_key}_std"]
+                .transform(lambda x: x.interpolate(method="linear", limit_direction="both"))
+            )
+        
+        if smoothing_window is not None:
+            # Apply rolling mean smoothing
+            df[f"{y_key}_mean"] = (
+                df.groupby("group_name")[f"{y_key}_mean"]
+                .transform(lambda x: x.rolling(window=smoothing_window, min_periods=1, center=True).mean())
+            )
+            
+            # For std, we use the mean of the std values in the window
+            df[f"{y_key}_std"] = (
+                df.groupby("group_name")[f"{y_key}_std"]
+                .transform(lambda x: x.rolling(window=smoothing_window, min_periods=1, center=True).mean())
+            )
+        
+        return df
+
+    def compute_grouped_metrics(self, 
+                              run_groups: List[RunGroup] | RunGroup | Dict[str, Dict[int, pd.DataFrame]], 
+                              x_key: str, 
+                              y_key: str,
+                              interpolate_missing: bool = False,
+                              min_seeds: Optional[int] = None,
+                              smoothing_window: Optional[int] = None,
+                              x_min: Optional[float] = None,
+                              x_max: Optional[float] = None) -> pd.DataFrame:
         """Analyze metrics across multiple run groups.
         
         This is a specific use case of get_stitched_runs that computes statistics
         across seeds for each run group.
         
         Args:
-            run_groups: List of RunGroup objects or single RunGroup
+            run_groups: Either:
+                       - List of RunGroup objects or single RunGroup
+                       - Pre-computed stitched runs from get_stitched_runs
             x_key: The key for the x-axis data
             y_key: The key for the y-axis data
+            interpolate_missing: Whether to interpolate missing values
+            min_seeds: Minimum number of seeds required for a valid measurement.
+                      If None, all measurements are kept.
+            smoothing_window: Window size for rolling mean smoothing. If None, no smoothing is applied.
+            x_min: Minimum x value to include in the results. If None, no lower bound is applied.
+            x_max: Maximum x value to include in the results. If None, no upper bound is applied.
             
         Returns:
             DataFrame containing the analyzed metrics
         """
-        stitched_data = self.get_stitched_runs(run_groups, x_key, y_key)
+        # Handle pre-computed stitched runs
+        if isinstance(run_groups, dict) and all(isinstance(v, dict) for v in run_groups.values()):
+            stitched_data = run_groups
+        else:
+            # Get stitched runs from run groups
+            stitched_data = self.get_stitched_runs(run_groups, x_key, y_key)
+            
         results_list = []
             
         for group_name, seed_data in stitched_data.items():
@@ -204,22 +275,48 @@ class WandbAnalyzer:
             xs = sorted(x_to_ys.keys())
             avgs = [np.mean(x_to_ys[x]) for x in xs]
             stds = [np.std(x_to_ys[x], ddof=0) for x in xs]
+            counts = [len(x_to_ys[x]) for x in xs]
             
             if self.verbose:
                 logging.info(f"  Found {len(xs)} unique x values")
                 logging.info(f"  Number of seeds: {len(seed_data)}")
             
-            for x, avg, std in zip(xs, avgs, stds):
+            for x, avg, std, count in zip(xs, avgs, stds, counts):
                 result = {
                     "group_name": group_name,	
                     x_key: x,
                     f"{y_key}_mean": avg,
                     f"{y_key}_std": std,
+                    f"{y_key}_count": count,
                     "num_seeds": len(seed_data)
                 }
                 results_list.append(result)
+        
+        # Convert to DataFrame
+        results_df = pd.DataFrame(results_list)
+        
+        # Filter by x-axis range if specified
+        if x_min is not None:
+            results_df = results_df[results_df[x_key] >= x_min]
+        if x_max is not None:
+            results_df = results_df[results_df[x_key] <= x_max]
+        
+        # Filter by minimum seeds if specified
+        if min_seeds is not None:
+            mask = results_df[f"{y_key}_count"] < min_seeds
+            results_df.loc[mask, f"{y_key}_mean"] = np.nan
+            results_df.loc[mask, f"{y_key}_std"] = np.nan
+        
+        # Transform data (interpolate and smooth if requested)
+        results_df = self._transform_data(
+            results_df, 
+            x_key, 
+            y_key, 
+            interpolate_missing=interpolate_missing,
+            smoothing_window=smoothing_window
+        )
                 
-        return pd.DataFrame(results_list)
+        return results_df
 
 # Example usage:
 if __name__ == "__main__":
@@ -232,16 +329,20 @@ if __name__ == "__main__":
     # Example 1: Using prefixes
     analyzer = WandbAnalyzer("claire-labo/pack", verbose=False)
     run_groups = [
-        RunGroup(name="2", prefix="llama32bin2func"),
-        RunGroup(name="8", prefix="llama32bin8func"),
-        RunGroup(name="16", prefix="llama32bin16func"),
-        RunGroup(name="32", prefix="llama32bin32func"),
-        RunGroup(name="48", prefix="llama32bin48func"),
-        RunGroup(name="64", prefix="llama32bin64func"),
+        RunGroup(name="2", prefix="llama31bin2func"),
+        RunGroup(name="4", prefix="llama31bin4func"),
+        RunGroup(name="8", prefix="llama31bin8func"),
+        RunGroup(name="16", prefix="llama31bin16func"),
+        RunGroup(name="32", prefix="llama31bin32func"),
+        RunGroup(name="48", prefix="llama31bin48func"),
+        RunGroup(name="64", prefix="llama31bin64func"),
     ]
+
+    stitched_runs = analyzer.get_stitched_runs(run_groups, x_key="round_num", y_key="Number of unique scores in program bank")
     
     # Get analyzed metrics
-    results_df = analyzer.compute_grouped_metrics(run_groups, x_key="round_num", y_key="avg_passed_score")
+    results_df = analyzer.compute_grouped_metrics(stitched_runs, x_key="round_num", y_key="Number of unique scores in program bank", 
+                                                  smoothing_window=15, interpolate_missing=True, x_min=0, x_max=1250, min_seeds=4)
 
     fig_scores, ax = swizz.plot(
         "multiple_std_lines_df",
@@ -249,10 +350,10 @@ if __name__ == "__main__":
         data_df=results_df,
         label_key="group_name",
         x_key="round_num",
-        y_key="avg_passed_score_mean",
-        yerr_key="avg_passed_score_std",
+        y_key="Number of unique scores in program bank_mean",
+        yerr_key="Number of unique scores in program bank_std",
         xlabel="Sampling Budget",
-        ylabel="Average Passed Score",
+        ylabel="Number of unique scores",
         legend_title="Functions in Context",
         legend_ncol=2,
         legend_loc="lower right",
@@ -261,5 +362,6 @@ if __name__ == "__main__":
     )
 
     plt.show()
+    print()
 
     # TODO: Return stiching as df instead of dict and group by custom stuff
